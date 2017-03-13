@@ -15,6 +15,14 @@ Route::get('/', function () {
     return redirect('/cars');
 });
 
+Route::get('/carmodels', 'CarmodelController@listItem');
+Route::post('/carmodels/datatable', 'CarmodelController@datatable');
+Route::get('/carmodels/create', 'CarmodelController@createForm');
+Route::post('/carmodels/create', 'CarmodelController@createItem');
+Route::get('/carmodels/{id}/update', 'CarmodelController@updateForm');
+Route::post('/carmodels/{id}/update', 'CarmodelController@updateItem');
+Route::post('/carmodels/{id}/delete', 'CarmodelController@deleteItem');
+
 Route::get('/cars', 'CarController@listItem');
 Route::post('/cars/datatable', 'CarController@datatable');
 Route::get('/cars/create', 'CarController@createForm');

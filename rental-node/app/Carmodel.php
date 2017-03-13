@@ -2,32 +2,28 @@
 
 namespace App;
 
-class Carmodel
+use Illuminate\Database\Eloquent\Model;
+
+class Carmodel extends Model
 {
-	protected static $_CACHE_ALL = null;
-	protected static $_CACHE_FIND = [];
+    protected $guarded = ['id', 'created_at', 'updated_at'];
 
-    public static function find($key)
+    public function car()
     {
-    	if (isset(static::$_CACHE_FIND[$key]))
-    		return static::$_CACHE_FIND[$key];
+    	return $this->hasMany('App\Car');
+    }
 
-    	$client = new \GuzzleHttp\Client();
-		$res = $client->request('POST', env('RENTAL_CENTRAL_API_URL') . '/api/carmodels/' . $key);
-		static::$_CACHE_FIND[$key] = json_decode($res->getBody());
-
-		return static::$_CACHE_FIND[$key];
-	}
-
-    public static function all()
+    public function scopeModelName($query, $names)
     {
-    	if (static::$_CACHE_ALL)
-    		return static::$_CACHE_ALL;
+        if (count($names) == 0)
+            return $query;
 
-    	$client = new \GuzzleHttp\Client();
-		$res = $client->request('POST', env('RENTAL_CENTRAL_API_URL') . '/api/carmodels');
-		static::$_CACHE_ALL = collect(json_decode($res->getBody()));
+        return $query->where(function ($q) use ($names) {
+            foreach($names as $name) {
+                $q = $q->orWhere('model', 'LIKE', "%$name%");
+            };
 
-		return static::$_CACHE_ALL;
-	}
+            return $q;
+        });
+    }
 }

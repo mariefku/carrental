@@ -21,14 +21,6 @@ Route::get('/admin', function () {
 
 Route::get('/search', 'SearchController@searchCar');
 
-Route::get('/admin/carmodels', 'CarmodelController@listItem');
-Route::post('/admin/carmodels/datatable', 'CarmodelController@datatable');
-Route::get('/admin/carmodels/create', 'CarmodelController@createForm');
-Route::post('/admin/carmodels/create', 'CarmodelController@createItem');
-Route::get('/admin/carmodels/{id}/update', 'CarmodelController@updateForm');
-Route::post('/admin/carmodels/{id}/update', 'CarmodelController@updateItem');
-Route::post('/admin/carmodels/{id}/delete', 'CarmodelController@deleteItem');
-
 Route::get('/admin/destinations', 'DestinationController@listItem');
 Route::post('/admin/destinations/datatable', 'DestinationController@datatable');
 Route::get('/admin/destinations/create', 'DestinationController@createForm');

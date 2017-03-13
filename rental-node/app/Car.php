@@ -13,6 +13,11 @@ class Car extends Model
     	return $this->hasMany('App\CarPrice');
     }
 
+    public function model()
+    {
+        return $this->belongsTo('App\Carmodel');
+    }
+
     public function priceTo($dest_id)
     {
         $ret = $this->prices()->where('destination_id', '=', $dest_id)->first();

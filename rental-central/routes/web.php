@@ -20,6 +20,7 @@ Route::get('/admin', function () {
 
 
 Route::get('/search', 'SearchController@searchCar');
+Route::post('/search/datatable', 'SearchController@datatable');
 
 Route::get('/admin/destinations', 'DestinationController@listItem');
 Route::post('/admin/destinations/datatable', 'DestinationController@datatable');

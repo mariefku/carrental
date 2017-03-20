@@ -80,7 +80,7 @@
           </div>
           <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-<!--               <li><a href="{{ action('CarmodelController@listItem') }}">Car Models</a></li>
+<!--           
               <li><a href="{{ action('DestinationController@listItem') }}">Destination</a></li>
               <li><a href="{{ action('RentalController@listItem') }}">Rental</a></li> -->
             </ul>
@@ -109,10 +109,10 @@
           'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
       });
-      function datatableEdit(url)
+      function datatableBook(url)
       {
         return '<form class="list-action" method="get" action="' + url + '">' +
-                '<button type="submit" class="btn btn-default">Edit</button>' +
+                '<button type="submit" class="btn btn-warning">Book</button>' +
                '</form>'
       }
       function datatableDelete(url)

@@ -17,16 +17,10 @@
       'options' => App\Destination::all()->pluck("name", "id")->toArray(),
       'default' => $destination_id,
     ])
-    @include('form.checkbox', [
-      'field' => 'model_name[]',
-      'label' => 'Model',
-      'checkbox' => App\Carmodel::all()->map(function ($i) use ($model_name) {
-        return [
-          "value" => $i->model,
-          "label" => $i->brand . " " . $i->model,
-          "default" => in_array($i->model, $model_name),
-        ];
-      }),
+    @include('form.text', [
+      'field' => 'model_name',
+      'label' => 'Model/Brand',
+      'default' => app('request')->input('model_name'),
     ])
     @include('form.date', [
       'field' => 'start_date',
@@ -46,14 +40,50 @@
       Form::close()
     !!}
 
+    <table class="table table-striped table-bordered" id="itemTable">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Brand</th>
+          <th>Model</th>
+          <th>Transmission</th>
+          <th>Fuel</th>
+          <th>Harga</th>      
+          <th>Action</th>
+        </tr>
+      </thead>
+    </table>
+
     @foreach($items as $item)
-    <h1>{{ $item->plate_number }}</h1>
-    <h2>{{ App\Carmodel::find($item->carmodel_id)->brand }} {{ App\Carmodel::find($item->carmodel_id)->model }}</h2>
+    <h1>{{ $item->id }} {{ $item->brand }} {{ $item->model }} {{ $item->transmission }} {{ $item->fuel }} {{ $item->price }}</h1>
     @endforeach
 
 @endsection
 
 @section('content.js')
 <script>
+$('#itemTable').DataTable( {
+    "ajax": {
+        "url": {!! json_encode(action("SearchController@searchCar")) !!} + "/datatable",
+        "type": "POST"
+    },
+
+    "columns": [
+      {"data": "id"},
+      {"data": "brand"},
+      {"data": "model"},
+      {"data": "transmission"},
+      {"data": "fuel"},
+      {"data": "price"},
+      {
+        "data": null,
+        "sortable": false,
+        "render": function(data) {
+          return datatableBook({!! json_encode(action("SearchController@searchCar")) !!} + "/" + data.id + "/update")/* +
+                  datatableDelete({!! json_encode(action("SearchController@searchCar")) !!} + "/" + data.id + "/delete")*/
+        }
+      }
+    ]
+} );
 </script>
 @endsection

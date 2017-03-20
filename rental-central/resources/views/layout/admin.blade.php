@@ -80,7 +80,7 @@
           </div>
           <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-              <li><a href="{{ action('CarmodelController@listItem') }}">Car Models</a></li>
+
               <li><a href="{{ action('DestinationController@listItem') }}">Destination</a></li>
               <li><a href="{{ action('RentalController@listItem') }}">Rental</a></li>
             </ul>

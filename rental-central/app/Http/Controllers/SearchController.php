@@ -119,7 +119,7 @@ class SearchController extends Controller
                         'id_cars' => $id_cars,
                         'destination_id' => $destination_id
                         //'tanggal_pinjam' => $tanggal_pinjam,
-                        //'tanggal_kembali' => $tanggal_kembali
+                        //'tanggal_kembali' => $tanggal_kembali,
                     ]
                 ]);
             } catch (Exception $e) {

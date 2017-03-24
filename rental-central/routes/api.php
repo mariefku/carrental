@@ -13,5 +13,5 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::post('/destinations/', 'DestinationController@apiListItem');
+Route::post('/destinations', 'DestinationController@apiListItem');
 Route::post('/destinations/{id}', 'DestinationController@apiShowItem');

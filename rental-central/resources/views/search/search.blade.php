@@ -48,14 +48,14 @@
           <th>Model</th>
           <th>Transmission</th>
           <th>Fuel</th>
-          <th>Harga</th>      
+          <th>Harga</th> 
           <th>Action</th>
         </tr>
       </thead>
     </table>
 
     @foreach($items as $item)
-    <h1>{{ $item->id }} {{ $item->brand }} {{ $item->model }} {{ $item->transmission }} {{ $item->fuel }} {{ $item->price }}</h1>
+    <h1>{{ $item->id }} {{ $item->brand }} {{ $item->model }} {{ $item->transmission }} {{ $item->fuel }} {{ $item->price }} {{ $item->rental_id }}</h1>
     @endforeach
 
 @endsection
@@ -79,7 +79,7 @@ $('#itemTable').DataTable( {
         "data": null,
         "sortable": false,
         "render": function(data) {
-          return datatableBook({!! json_encode(action("SearchController@searchCar")) !!} + "/" + data.id + "/update")/* +
+          return datatableBook({!! json_encode(action("SearchController@searchCar")) !!} + "/" + data.rental_id + "/book/" + data.id+ "/" + data.destination_id)/* +
                   datatableDelete({!! json_encode(action("SearchController@searchCar")) !!} + "/" + data.id + "/delete")*/
         }
       }

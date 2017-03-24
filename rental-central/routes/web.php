@@ -21,6 +21,7 @@ Route::get('/admin', function () {
 
 Route::get('/search', 'SearchController@searchCar');
 Route::post('/search/datatable', 'SearchController@datatable');
+Route::get('/search/{id_r}/book/{id_c}/{id_d}', 'SearchController@book');
 
 Route::get('/admin/destinations', 'DestinationController@listItem');
 Route::post('/admin/destinations/datatable', 'DestinationController@datatable');

@@ -22,6 +22,7 @@ class SearchController extends Controller
                 $client = new \GuzzleHttp\Client();
                 $res = $client->request('POST', $rental->url . '/api/search',  [
                     'json' => [
+                        'rental_id' => $rental->id,
                         'model_name' => $model_name,
                         'destination_id' => $destination_id,
                     ]
@@ -32,6 +33,35 @@ class SearchController extends Controller
             if ($res->getStatusCode() != 200)
                 continue;
             $result = array_merge($result, json_decode($res->getBody()));
+        }
+
+
+        return $result;
+    }
+
+    protected function fetchAll2($opt)
+    {
+
+        $model_name = $opt['model_name'];
+        $destination_id = $opt['destination_id'];
+        $result = [];
+
+        foreach(Rental::all() as $rental) {
+            try {
+                $client = new \GuzzleHttp\Client();
+                $res = $client->request('POST', $rental->url . '/api/search2',  [
+                    'json' => [
+                        'rental_id' => $rental->id,
+                        'model_name' => $model_name,
+                        'destination_id' => $destination_id,
+                    ]
+                ]);
+            } catch (Exception $e) {
+                continue;
+            }
+            if ($res->getStatusCode() != 200)
+                continue;
+            $result = json_decode($res->getBody());
         }
 
 
@@ -66,46 +96,44 @@ class SearchController extends Controller
             ->with('end_date', \Carbon\Carbon::now()->addDay(1)->format('d/m/Y'));
     }
 
-    protected function fetchAll2($opt)
-    {
-
-        $model_name = $opt['model_name'];
-        $destination_id = $opt['destination_id'];
-        $result = [];
-
-        foreach(Rental::all() as $rental) {
-            try {
-                $client = new \GuzzleHttp\Client();
-                $res = $client->request('POST', $rental->url . '/api/search2',  [
-                    'json' => [
-                        'model_name' => $model_name,
-                        'destination_id' => $destination_id,
-                    ]
-                ]);
-            } catch (Exception $e) {
-                continue;
-            }
-            if ($res->getStatusCode() != 200)
-                continue;
-            $result = json_decode($res->getBody());
-        }
-
-
-        return $result;
-    }
-
-
     public function datatable(Request $request)
     {
 
         $items = session('data');
-        $jsonArray = array();
-        foreach ($items as $item) {
-            $item = array($item);
-            $jsonArray = array_merge($jsonArray,$item);
-        }
-        $data['data'] = $jsonArray;
-           return response()->json($data);
+        $data['data'] = $items;
+        return response()->json($data);
     }
+
+    public function book($id_r, $id_c, $id_d)
+    {
+        $rental = Rental::find($id_r);
+        $id_cars = $id_c;
+        $destination_id = $id_d;
+        $result = [];
+
+        if ($rental) {
+            try {
+                $client = new \GuzzleHttp\Client();
+                $res = $client->request('POST', $rental->url . '/api/booking',  [
+                    'json' => [
+                        'id_cars' => $id_cars,
+                        'destination_id' => $destination_id
+                        //'tanggal_pinjam' => $tanggal_pinjam,
+                        //'tanggal_kembali' => $tanggal_kembali
+                    ]
+                ]);
+            } catch (Exception $e) {
+                $e->getMessage();
+            }
+
+            if ($res->getStatusCode() != 200)
+            $res->getStatusCode();
+
+            $result = $res->getBody();
+        }
+
+        return $result;
+    }
+
 }
 

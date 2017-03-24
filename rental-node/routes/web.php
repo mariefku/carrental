@@ -30,3 +30,7 @@ Route::post('/cars/create', 'CarController@createItem');
 Route::get('/cars/{id}/update', 'CarController@updateForm');
 Route::post('/cars/{id}/update', 'CarController@updateItem');
 Route::post('/cars/{id}/delete', 'CarController@deleteItem');
+
+Route::get('/booking', 'BookingController@listItem');
+Route::post('/booking/datatable', 'BookingController@datatable');
+

@@ -17,9 +17,10 @@ class BookingController extends Controller
         return view('booking.list')->with('items', $items);
     }
 
-    public function createForm()
+    public function createForm(Request $request)
     {
-        return view('booking.create');
+        $databooks = $request;
+        return view('booking.create')->with('databooks', $databooks);
     }
 
     public function createItem(Request $request)

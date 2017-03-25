@@ -14,6 +14,10 @@
     {{ csrf_field() }}    
     <div class="panel-body">
 
+        <input type="hidden" class="form-control" id="nama" placeholder="" name="id_rental" value="{{ $databooks->rental_id }}">
+        <input type="hidden" class="form-control" id="nama" placeholder="" name="id_mobil" value="{{ $databooks->car_id }}">
+        <input type="hidden" class="form-control" id="nama" placeholder="" name="id_rental" value="{{ $databooks->destination_id }}">
+
         <div class="form-group">
           <label for="nama" class="col-sm-12 control-label">Nama Lengkap</label>
           <div class="col-sm-12">

@@ -6,7 +6,7 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateBookingsTable extends Migration
 {
-    /**
+    /**     
      * Run the migrations.
      *
      * @return void
@@ -15,10 +15,18 @@ class CreateBookingsTable extends Migration
     {
         Schema::create('bookings', function (Blueprint $table) {
             $table->increments('id');
-            $table->timestamps();
 
-            $table->string('name');
-            $table->string('url');
+            $table->string('nama');
+            $table->string('nohp');
+            $table->string('email');
+            $table->string('tanggal_lahir');
+            $table->string('id_mobil');
+            $table->string('detail_mobil');
+            $table->string('id_tujuan');
+            $table->string('harga');
+            $table->string('rental_tujuan');
+
+            $table->timestamps();
         });
     }
 

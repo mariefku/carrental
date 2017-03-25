@@ -76,8 +76,7 @@ $('#itemTable').DataTable( {
         "data": null,
         "sortable": false,
         "render": function(data) {
-          return datatableBook({!! json_encode(action("SearchController@searchCar")) !!} + "/" + data.rental_id + "/book/" + data.id+ "/" + data.destination_id)/* +
-                  datatableDelete({!! json_encode(action("SearchController@searchCar")) !!} + "/" + data.id + "/delete")*/
+          return datatableBook( "bookings", data.rental_id , data.id, data.destination_id )
         }
       }
     ]

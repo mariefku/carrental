@@ -109,9 +109,13 @@
           'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
       });
-      function datatableBook(url)
+      function datatableBook(url, rental_id , car_id, destination_id)
       {
-        return '<form class="list-action" method="get" action="' + url + '">' +
+        return '<form class="list-action" method="post" action="' + url + '">' +
+                '{{ csrf_field() }}' +
+                '<input type="hidden" name="rental_id" value="' + rental_id + '">' +
+                '<input type="hidden" name="car_id" value="' + car_id + '">' +
+                '<input type="hidden" name="destination_id" value="' + destination_id + '">' +
                 '<button type="submit" class="btn btn-warning">Book</button>' +
                '</form>'
       }

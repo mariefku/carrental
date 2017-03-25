@@ -84,9 +84,7 @@ class SearchController extends Controller
             "model_name" => $model_name,
         ]); 
 
-        
         \Session::flash('data', $datas);
-        var_dump(session('data'));
 
         return view('search.search')
             ->with('items', $items)

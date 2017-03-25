@@ -54,9 +54,6 @@
       </thead>
     </table>
 
-    @foreach($items as $item)
-    <h1>{{ $item->id }} {{ $item->brand }} {{ $item->model }} {{ $item->transmission }} {{ $item->fuel }} {{ $item->price }} {{ $item->rental_id }}</h1>
-    @endforeach
 
 @endsection
 

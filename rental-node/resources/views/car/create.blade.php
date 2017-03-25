@@ -13,11 +13,23 @@
       ])
     !!}
 
+@php
+  function generateRandomString($length) {
+    $characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    $charactersLength = strlen($characters);
+    $randomString = '';
+    for ($i = 0; $i < $length; $i++) {
+        $randomString .= $characters[rand(0, $charactersLength - 1)];
+    }
+    return $randomString;
+  }
+@endphp
+
     @include('form.text', [
       'field' => 'plate_number',
       'label' => 'Plate Number',
       'placeholder' => 'plate number',
-      'default' => old('plate_number'),
+      'default' => generateRandomString(rand(1,2)).' '.rand(1000,9999).' '.generateRandomString(rand(2,3)),
     ])
 
     @include('form.select', [
@@ -40,7 +52,8 @@
         @include('form.text', [ 
           'field' => 'prices[' . $destination->id . ']',
           'label' => $destination->name,
-          'default' => '0',
+          'default' => 500000,
+
         ])
       @endforeach
       </div>

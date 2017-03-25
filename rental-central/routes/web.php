@@ -38,3 +38,11 @@ Route::post('/admin/rentals/create', 'RentalController@createItem');
 Route::get('/admin/rentals/{id}/update', 'RentalController@updateForm');
 Route::post('/admin/rentals/{id}/update', 'RentalController@updateItem');
 Route::post('/admin/rentals/{id}/delete', 'RentalController@deleteItem');
+
+Route::get('/bookings', 'BookingController@listItem');
+Route::post('/bookings/datatable', 'BookingController@datatable');
+Route::get('/bookings/create', 'BookingController@createForm');
+Route::post('/bookings/create', 'BookingController@createItem');
+Route::get('/bookings/{id}/update', 'BookingController@updateForm');
+Route::post('/bookings/{id}/update', 'BookingController@updateItem');
+Route::post('/bookings/{id}/delete', 'BookingController@deleteItem');

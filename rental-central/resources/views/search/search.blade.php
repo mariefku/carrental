@@ -12,10 +12,10 @@
     !!}
 
     @include('form.select', [
-      'field' => 'destination_id',
+      'field' => 'destination',
       'label' => 'Tujuan',
-      'options' => App\Destination::all()->pluck("name", "id")->toArray(),
-      'default' => $destination_id,
+      'options' => App\Destination::all()->pluck("name", "name")->toArray(),
+      'default' => $destination,
     ])
     @include('form.text', [
       'field' => 'model_name',
@@ -48,6 +48,7 @@
           <th>Model</th>
           <th>Transmission</th>
           <th>Fuel</th>
+          <th>Year</th>
           <th>Harga</th> 
           <th>Action</th>
         </tr>
@@ -71,12 +72,28 @@ $('#itemTable').DataTable( {
       {"data": "model"},
       {"data": "transmission"},
       {"data": "fuel"},
+      {"data": "year"},
       {"data": "price"},
       {
         "data": null,
         "sortable": false,
         "render": function(data) {
-          return datatableBook( "bookings", data.rental_id , data.id, data.destination_id )
+          return datatableBook( "bookings",
+                                data.id,
+                                data.created_at,
+                                data.updated_at,
+                                data.carmodel_id,
+                                data.plate_number,
+                                data.brand,
+                                data.model,
+                                data.transmission,
+                                data.fuel,
+                                data.car_id,
+                                data.destination,
+                                data.price,
+                                data.year,
+                                data.rental_id
+                                )
         }
       }
     ]

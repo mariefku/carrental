@@ -18,6 +18,7 @@
         <th>Model</th>
         <th>Transmission</th>
         <th>Fuel</th>
+        <th>Year</th>
         <th>Action</th>
       </tr>
     </thead>
@@ -38,6 +39,7 @@ $('#itemTable').DataTable( {
       {"data": "carmodel_model"},
       {"data": "carmodel_transmission"},
       {"data": "carmodel_fuel"},
+      {"data": "year"},
       {
         "data": null,
         "sortable": false,

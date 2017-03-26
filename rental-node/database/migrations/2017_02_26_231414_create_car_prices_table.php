@@ -18,7 +18,7 @@ class CreateCarPricesTable extends Migration
             $table->timestamps();
 
             $table->integer('car_id')->unsigned();
-            $table->integer('destination_id')->unsigned();
+            $table->string('destination');
             $table->integer('price');
         });
     }

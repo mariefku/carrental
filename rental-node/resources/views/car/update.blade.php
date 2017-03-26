@@ -37,11 +37,11 @@
         Harga
       </label>
       <div class="container">
-      @foreach(App\Destination::all() as $destination)
+      @foreach(App\CarPrice::all()->where('car_id',$item->id) as $carprice)
         @include('form.text', [ 
-          'field' => 'prices[' . $destination->id . ']',
-          'label' => $destination->name,
-          'default' => $item->priceTo($destination->id)->price,
+          'field' => 'prices[' . $carprice->destination . ']',
+          'label' => $carprice->destination,
+          'default' => old('price', $carprice->price),
         ])
       @endforeach
       </div>

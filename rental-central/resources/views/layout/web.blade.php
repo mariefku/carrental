@@ -109,14 +109,40 @@
           'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
       });
-      function datatableBook(url, rental_id , car_id, destination_id)
+      function datatableBook(url,
+                                id,
+                                created_at,
+                                updated_at,
+                                carmodel_id,
+                                plate_number,
+                                brand,
+                                model,
+                                transmission,
+                                fuel,
+                                car_id,
+                                destination,
+                                price,
+                                year,
+                                rental_id
+                            )
       {
         return '<form class="list-action" method="post" action="' + url + '">' +
                 '{{ csrf_field() }}' +
-                '<input type="hidden" name="rental_id" value="' + rental_id + '">' +
-                '<input type="hidden" name="car_id" value="' + car_id + '">' +
-                '<input type="hidden" name="destination_id" value="' + destination_id + '">' +
-                '<button type="submit" class="btn btn-warning">Book</button>' +
+                  '<input type="hidden" name="id" value="' + id + '">' +
+                  '<input type="hidden" name="created_at" value="' + created_at + '">' +
+                  '<input type="hidden" name="updated_at" value="' + updated_at + '">' +
+                  '<input type="hidden" name="carmodel_id" value="' + carmodel_id + '">' +
+                  '<input type="hidden" name="plate_number" value="' + plate_number + '">' +
+                  '<input type="hidden" name="brand" value="' + brand + '">' +
+                  '<input type="hidden" name="model" value="' + model + '">' +
+                  '<input type="hidden" name="transmission" value="' + transmission + '">' +
+                  '<input type="hidden" name="fuel" value="' + fuel + '">' +
+                  '<input type="hidden" name="car_id" value="' + car_id + '">' +
+                  '<input type="hidden" name="destination" value="' + destination + '">' +
+                  '<input type="hidden" name="price" value="' + price + '">' +
+                  '<input type="hidden" name="year" value="' + year + '">' +
+                  '<input type="hidden" name="rental_id" value="' + rental_id + '">' +
+                  '<button type="submit" class="btn btn-warning">Book</button>' +
                '</form>'
       }
       function datatableDelete(url)

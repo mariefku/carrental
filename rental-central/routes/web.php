@@ -40,8 +40,5 @@ Route::post('/admin/rentals/{id}/update', 'RentalController@updateItem');
 Route::post('/admin/rentals/{id}/delete', 'RentalController@deleteItem');
 
 Route::post('/bookings', 'BookingController@createForm');
-Route::post('/bookings/datatable', 'BookingController@datatable');
-Route::post('/bookings/create', 'BookingController@createItem');
-Route::get('/bookings/{id}/update', 'BookingController@updateForm');
-Route::post('/bookings/{id}/update', 'BookingController@updateItem');
-Route::post('/bookings/{id}/delete', 'BookingController@deleteItem');
+Route::post('/bookings/confirm', 'BookingController@confirmItem');
+Route::post('/bookings/confirmed', 'BookingController@storeItem');

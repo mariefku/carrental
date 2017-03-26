@@ -28,6 +28,7 @@ class CarController extends Controller
             'carmodel_id' => 'required',
             'plate_number' => 'required',
             'prices' => 'required',
+            'year' => 'required',
         ]);
 
         $item = new Car();
@@ -35,7 +36,7 @@ class CarController extends Controller
         $item->save();
         $item->prices()->createMany(array_values(collect($request->prices)->map(function ($val, $key) {
             return [
-                "destination_id" => $key,
+                "destination" => $key,
                 "price" => $val,
             ];
         })->toArray()));
@@ -63,7 +64,7 @@ class CarController extends Controller
         $item->prices()->delete();
         $item->prices()->createMany(array_values(collect($request->prices)->map(function ($val, $key) {
             return [
-                "destination_id" => $key,
+                "destination" => $key,
                 "price" => strlen($val) == 0 ? 0 : $val,
             ];
         })->toArray()));

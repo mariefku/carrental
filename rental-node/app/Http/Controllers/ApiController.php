@@ -44,6 +44,7 @@ class ApiController extends Controller
 						    "car_id" => $item->car_id,
 						    "destination_id" => $item->destination_id,
 						    "price" => $item->price,
+						    "year" => $item->year,
 						    "rental_id" => intval($rental_id),
 	         				);
 	         }
@@ -57,7 +58,7 @@ class ApiController extends Controller
     public function apiSearch2(Request $request)
     {
     	$model_name = $request->model_name;
-    	$destination_id = $request->destination_id;
+    	$destination = $request->destination;
     	$rental_id	= $request->rental_id;
     	
     	if ($model_name) {
@@ -65,9 +66,9 @@ class ApiController extends Controller
     		$car->join('carmodels', function ($join){
 		            $join->on('cars.carmodel_id', '=', 'carmodels.id');
 		        })
-	    		->join('car_prices', function ($join) use ($destination_id){
+	    		->join('car_prices', function ($join) use ($destination){
 			            $join->on('cars.id', '=', 'car_prices.car_id')
-			            ->where('car_prices.destination_id', '=', $destination_id);
+			            ->where('car_prices.destination', '=', $destination);
 			        })
 			 ->select('cars.*','carmodels.*','car_prices.*','cars.id as idmobil')
 	         ->where('carmodels.brand', 'like', '%' . $model_name . '%')
@@ -87,8 +88,9 @@ class ApiController extends Controller
 						    "transmission" => $item->transmission,
 						    "fuel" => $item->fuel,
 						    "car_id" => $item->car_id,
-						    "destination_id" => $item->destination_id,
+						    "destination" => $item->destination,
 						    "price" => $item->price,
+						    "year" => $item->year,
 						    "rental_id" => intval($rental_id),
 	         				);
 	         }
@@ -102,37 +104,27 @@ class ApiController extends Controller
 
     public function apiBooking(Request $request)
     {
-    	$cars_id = $request->id_cars;
-    	$destination_id = $request->destination_id;
 
-    	if ($cars_id) {
-    		$car =  Car::getQuery();
-    		$car->join('carmodels', function ($join){
-		            $join->on('cars.carmodel_id', '=', 'carmodels.id');
-		        })
-	    		->join('car_prices', function ($join) use ($destination_id){
-			            $join->on('cars.id', '=', 'car_prices.car_id')
-			            ->where('car_prices.destination_id', '=', $destination_id);
-			        })
-			 ->select('cars.*','carmodels.*','car_prices.*','cars.id as idmobil')
-	         ->where('cars.id', $cars_id)
-	         ;
+    	if ($request) {
+	        $booking = new Booking();
+	        $booking->nama = $request->nama;
+	        $booking->nohp = $request->nohp;
+	        $booking->email = $request->email;
+	        $booking->tanggal_lahir = $request->tanggal_lahir;
+	        $booking->car_id = $request->car_id;
+	        $booking->brand = $request->brand;
+	        $booking->model = $request->model;
+	        $booking->transmission = $request->transmission;
+	        $booking->fuel = $request->fuel;
+	        $booking->destination = $request->destination;
+	        $booking->price = $request->price;
+	        $booking->year = $request->year;
+	        $booking->save();
 
-
-	         $items = $car->get();
-	         foreach ($items as $item) {
-     	        $booking = new Booking();
-		        $booking->car_id = $item->idmobil;
-		        $booking->destination_id = $item->destination_id;
-		        $booking->price = $item->price;
-		        $booking->save();
-	         }
-	         
-	         return response("Sukses");
-
+	         return response('<span style="color:green;"><strong>Success from node-1 !!<strong></span>');
 
     	}
 
-        return response()->json([]);
+        return response('<span style="color:red;"><strong>Failed from node-1 !!<strong></span>');
     }
 }

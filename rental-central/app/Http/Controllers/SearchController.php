@@ -14,7 +14,7 @@ class SearchController extends Controller
     {
 
         $model_name = $opt['model_name'];
-        $destination_id = $opt['destination_id'];
+        $destination = $opt['destination'];
         $result = [];
 
         foreach(Rental::all() as $rental) {
@@ -24,7 +24,7 @@ class SearchController extends Controller
                     'json' => [
                         'rental_id' => $rental->id,
                         'model_name' => $model_name,
-                        'destination_id' => $destination_id,
+                        'destination' => $destination,
                     ]
                 ]);
             } catch (Exception $e) {
@@ -43,7 +43,7 @@ class SearchController extends Controller
     {
 
         $model_name = $opt['model_name'];
-        $destination_id = $opt['destination_id'];
+        $destination = $opt['destination'];
         $result = [];
 
         foreach(Rental::all() as $rental) {
@@ -53,7 +53,7 @@ class SearchController extends Controller
                     'json' => [
                         'rental_id' => $rental->id,
                         'model_name' => $model_name,
-                        'destination_id' => $destination_id,
+                        'destination' => $destination,
                     ]
                 ]);
             } catch (Exception $e) {
@@ -73,14 +73,16 @@ class SearchController extends Controller
         $model_name = $request->model_name;
         if ($model_name == null)
             $model_name = [];
-        $destination_id = $request->destination_id;
+        $destination = $request->destination;
         $opt = [];
+
         $items = $this->fetchAll([
-            "destination_id" => $destination_id,
+            "destination" => $destination,
             "model_name" => $model_name,
         ]);
+        
         $datas = $this->fetchAll2([
-            "destination_id" => $destination_id,
+            "destination" => $destination,
             "model_name" => $model_name,
         ]); 
 
@@ -89,7 +91,7 @@ class SearchController extends Controller
         return view('search.search')
             ->with('items', $items)
             ->with('model_name', $model_name)
-            ->with('destination_id', $destination_id)
+            ->with('destination', $destination)
             ->with('start_date', \Carbon\Carbon::now()->format('d/m/Y'))
             ->with('end_date', \Carbon\Carbon::now()->addDay(1)->format('d/m/Y'));
     }

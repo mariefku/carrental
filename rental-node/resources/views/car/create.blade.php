@@ -42,20 +42,48 @@
       'default' => old('carmodel_id'),
     ])
 
+    @include('form.text', [
+      'field' => 'year',
+      'label' => 'Year',
+      'placeholder' => 'year',
+      'default' => old('year'),
+    ])
 
     <div class="form-group">
       <label class="control-label">
         Harga
       </label>
       <div class="container">
-      @foreach(App\Destination::all() as $destination)
         @include('form.text', [ 
-          'field' => 'prices[' . $destination->id . ']',
-          'label' => $destination->name,
+          'field' => 'prices[Semarang]',
+          'label' => 'Semarang',
           'default' => 500000,
 
         ])
-      @endforeach
+        @include('form.text', [ 
+          'field' => 'prices[Solo]',
+          'label' => 'Solo',
+          'default' => 500000,
+
+        ])
+        @include('form.text', [ 
+          'field' => 'prices[Jepara]',
+          'label' => 'Jepara',
+          'default' => 500000,
+
+        ])
+        @include('form.text', [ 
+          'field' => 'prices[Yogyakarta]',
+          'label' => 'Yogyakarta',
+          'default' => 500000,
+
+        ])
+        @include('form.text', [ 
+          'field' => 'prices[Jakarta]',
+          'label' => 'Jakarta',
+          'default' => 500000,
+
+        ])
       </div>
     </div>
 

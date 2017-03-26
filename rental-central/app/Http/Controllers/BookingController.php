@@ -170,13 +170,13 @@ class BookingController extends Controller
             }
             catch (RequestException $e) {
                 if ($e->hasResponse()) {
-               $result = '<span style="color:red;"><strong>Failed Respond Server Tidak Dapat Dihubungi!!</strong></span>
+               $result = '<span style="color:red;">Catched Exception: <strong>Failed Respond Server Tidak Dapat Dihubungi!!</strong></span>
                             <br>
                             <br>'.
                             Psr7\str($e->getResponse());
                 }else{
 
-                $result = '<span style="color:red;"><strong>Fatal Error Server Not Found!!</strong></span>
+                $result = '<span style="color:red;">Catched Exception: <strong>Fatal Error Server Tidak Ditemukan!!</strong></span>
                             <br>
                             <br>'.
                             Psr7\str($e->getRequest());

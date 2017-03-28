@@ -104,6 +104,18 @@
     <script src="{{ asset('js/datatables.min.js') }}"></script>
     <script>
       $.fn.datepicker.defaults.format = "dd/mm/yyyy";
+      $.fn.datepicker.dates['en'] = {
+          days: ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"],
+          daysShort: ["Min", "Sen", "Sel", "Rab", "Kam", "Jum", "Sab"],
+          daysMin: ["Mi", "Sen", "Sel", "Ra", "Ka", "Ju", "Sa"],
+          months: ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"],
+          monthsShort: ["Jan", "Feb", "Mar", "Apr", "Mei", "Jun", "Jul", "Agu", "Sep", "Okt", "Nov", "Des"],
+          today: "Today",
+          clear: "Clear",
+          format: "mm/dd/yyyy",
+          titleFormat: "MM yyyy", /* Leverages same syntax as 'format' */
+          weekStart: 0
+      };
       $.ajaxSetup({
         headers: {
           'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -123,7 +135,9 @@
                                 destination,
                                 price,
                                 year,
-                                rental_id
+                                rental_id,
+                                start_date,
+                                end_date
                             )
       {
         return '<form class="list-action" method="post" action="' + url + '">' +
@@ -142,6 +156,8 @@
                   '<input type="hidden" name="price" value="' + price + '">' +
                   '<input type="hidden" name="year" value="' + year + '">' +
                   '<input type="hidden" name="rental_id" value="' + rental_id + '">' +
+                  '<input type="hidden" name="start_date" value="' + start_date + '">' +
+                  '<input type="hidden" name="end_date" value="' + end_date + '">' +
                   '<button type="submit" class="btn btn-warning">Book</button>' +
                '</form>'
       }

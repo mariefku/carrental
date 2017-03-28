@@ -19,6 +19,8 @@
   <input type="hidden" name="price"         value="{{ $items-> price }}">
   <input type="hidden" name="year"          value="{{ $items-> year }}">
   <input type="hidden" name="rental_id"     value="{{ $items-> rental_id }}">
+  <input type="hidden" name="start_date"    value="{{ $items-> start_date }}" id="start_date">
+  <input type="hidden" name="end_date"      value="{{ $items-> end_date }}" id="end_date">
 
   <input type="hidden" name="nama"          value="{{ $items-> nama }}">
   <input type="hidden" name="nohp"          value="{{ $items-> nohp }}">
@@ -109,13 +111,13 @@
             <div class="form-group">
               <label for="" class="col-sm-12 ">Tanggal Peminjaman</label>
               <div class="col-sm-12">
-                <input type="text" class="form-control" id="" placeholder="" name="" value="" required readonly>
+                <input type="text" class="form-control" id="show_start_date" placeholder="" name="" value="" required readonly>
               </div>
             </div>
             <div class="form-group">
               <label for="" class="col-sm-12 text-left">Tanggal Kembali</label>
               <div class="col-sm-12">
-                <input type="text" class="form-control" id="" placeholder="" name="" value="" required readonly>
+                <input type="text" class="form-control" id="show_end_date" placeholder="" name="" value="" required readonly>
               </div>
             </div>
           </div>
@@ -134,4 +136,25 @@
   </div>
 
 </form>
+@endsection
+
+@section('content.js')
+<script>
+  //init option hidden bootstrap datepicker
+  $('#start_date').datepicker({
+      format: 'yyyy-mm-dd',
+  });
+
+  $('#end_date').datepicker({
+      format: 'yyyy-mm-dd',
+  });
+
+  //set showing value from hidden bootstrap datepicker
+  $('#show_start_date').val(
+    $('#start_date').datepicker('getFormattedDate','DD, dd MM yyyy')
+  );
+  $('#show_end_date').val(
+    $('#end_date').datepicker('getFormattedDate','DD, dd MM yyyy')
+  );
+</script>
 @endsection

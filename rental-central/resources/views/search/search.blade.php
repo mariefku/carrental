@@ -22,16 +22,24 @@
       'label' => 'Model/Brand',
       'default' => app('request')->input('model_name'),
     ])
+
     @include('form.date', [
-      'field' => 'start_date',
+      'field' => '',
       'label' => 'Tanggal Berangkat',
-      'default' => $start_date,
+      'attributes' => [
+          'id' => 'show_start_date',
+      ],
     ])
+    <input type="hidden" name="start_date" id="start_date">
+
     @include('form.date', [
-      'field' => 'end_date',
+      'field' => '',
       'label' => 'Tanggal Kembali',
-      'default' => $end_date,
+      'attributes' => [
+        'id' => 'show_end_date',
+      ],
     ])
+  <input type="hidden" name='end_date' id="end_date">
 
     <div class="form-group">
       <button type="submit" class="btn btn-primary">Cari</button>
@@ -92,11 +100,55 @@ $('#itemTable').DataTable( {
                                 data.destination,
                                 data.price,
                                 data.year,
-                                data.rental_id
+                                data.rental_id,
+                                data.start_date,
+                                data.end_date
                                 )
         }
       }
     ]
 } );
+
+//init and set date
+@if ( app('request')->input('start_date') == null || app('request')->input('end_date') == null )
+  var start_date = new Date();
+  var end_date = new Date();
+      end_date.setDate(end_date.getDate() + 1);
+@else
+  var start_date=new Date("{!! app('request')->input('start_date') !!}");
+  var end_date = new Date("{!! app('request')->input('end_date') !!}");
+@endif
+
+//init option bootstrap datepicker
+$('#show_start_date').datepicker({
+    format: 'DD, dd MM yyyy',
+    autoclose: true,
+}).datepicker("setDate", start_date).datepicker("setStartDate", new Date());
+
+$('#show_end_date').datepicker({
+    format: 'DD, dd MM yyyy',
+    autoclose: true,
+}).datepicker("setDate", end_date).datepicker("setStartDate", end_date);
+
+
+//set hidden value from bootstrap datepicker
+$('#start_date').val(
+  $('#show_start_date').datepicker('getFormattedDate','yyyy-mm-dd')
+);
+$('#end_date').val(
+  $('#show_end_date').datepicker('getFormattedDate','yyyy-mm-dd')
+);
+
+//on change datepicker set value to hidden date from bootstrap datepicker
+$('#show_start_date').on("changeDate", function() {
+    $('#start_date').val(
+        $('#show_start_date').datepicker('getFormattedDate','yyyy-mm-dd')
+    );
+});
+$('#show_end_date').on("changeDate", function() {
+    $('#end_date').val(
+        $('#show_end_date').datepicker('getFormattedDate','yyyy-mm-dd')
+    );
+});
 </script>
 @endsection

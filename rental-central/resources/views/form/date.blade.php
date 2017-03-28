@@ -19,7 +19,6 @@
 						'class' => 'form-control input-' . (isset($type) ? $type : 'date'),
 						'placeholder' => isset($placeholder) ? $placeholder : '',
 						'data-provide' => 'datepicker',
-						'data-date-format' => 'dd/mm/yyyy',
 					] + (isset($attributes) ? $attributes : [])
 				)
 			!!}

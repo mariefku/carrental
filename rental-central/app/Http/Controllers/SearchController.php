@@ -44,16 +44,20 @@ class SearchController extends Controller
 
         $model_name = $opt['model_name'];
         $destination = $opt['destination'];
+        $start_date = $opt['start_date'];
+        $end_date = $opt['end_date'];
         $result = [];
 
         foreach(Rental::all() as $rental) {
             try {
                 $client = new \GuzzleHttp\Client();
-                $res = $client->request('POST', $rental->url . '/api/search2',  [
+                $res = $client->request('POST', $rental->url . '/api/search3',  [
                     'json' => [
                         'rental_id' => $rental->id,
                         'model_name' => $model_name,
                         'destination' => $destination,
+                        'start_date' => $start_date,
+                        'end_date' => $end_date
                     ]
                 ]);
             } catch (Exception $e) {
@@ -74,6 +78,8 @@ class SearchController extends Controller
         if ($model_name == null)
             $model_name = [];
         $destination = $request->destination;
+        $start_date = $request->start_date;
+        $end_date = $request->end_date;
         $opt = [];
 
         $items = $this->fetchAll([
@@ -84,6 +90,8 @@ class SearchController extends Controller
         $datas = $this->fetchAll2([
             "destination" => $destination,
             "model_name" => $model_name,
+            "start_date" => $start_date,
+            "end_date" => $end_date,
         ]); 
 
         \Session::flash('data', $datas);
@@ -91,9 +99,7 @@ class SearchController extends Controller
         return view('search.search')
             ->with('items', $items)
             ->with('model_name', $model_name)
-            ->with('destination', $destination)
-            ->with('start_date', \Carbon\Carbon::now()->format('d/m/Y'))
-            ->with('end_date', \Carbon\Carbon::now()->addDay(1)->format('d/m/Y'));
+            ->with('destination', $destination);
     }
 
     public function datatable(Request $request)

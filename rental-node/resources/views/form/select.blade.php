@@ -1,4 +1,4 @@
-<div class="form-group">
+<div class="form-group col-sm-12">
 	@if (isset($label))
 		<label
 			for="{{ $field }}" class="control-label"

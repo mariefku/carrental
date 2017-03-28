@@ -28,6 +28,8 @@
     <input type="hidden" name="price"         value="{{ $databooks-> price }}">
     <input type="hidden" name="year"          value="{{ $databooks-> year }}">
     <input type="hidden" name="rental_id"     value="{{ $databooks-> rental_id }}">
+    <input type="hidden" name="start_date"     value="{{ $databooks-> start_date }}">
+    <input type="hidden" name="end_date"     value="{{ $databooks-> end_date }}">
 
         <div class="form-group">
           <label for="nama" class="col-sm-12 control-label">Nama Lengkap</label>

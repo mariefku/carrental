@@ -41,6 +41,8 @@ class BookingController extends Controller
             'price' => 'required',
             'year' => 'required',
             'rental_id' => 'required',
+            'start_date' => 'required',
+            'end_date' => 'required',
 
             'nama' => 'required',
             'nohp' => 'required',

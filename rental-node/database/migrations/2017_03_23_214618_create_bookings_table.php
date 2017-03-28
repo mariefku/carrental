@@ -28,6 +28,8 @@ class CreateBookingsTable extends Migration
             $table->string('destination');
             $table->string('price');
             $table->string('year');
+            $table->date('date_rent');
+            $table->date('date_return');
 
             $table->timestamps();
         });

@@ -20,6 +20,7 @@ class CreateCarsTable extends Migration
             $table->integer('carmodel_id')->unsigned();
             $table->string('plate_number');
             $table->string('year');
+            $table->integer('status');
         });
     }
 

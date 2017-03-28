@@ -102,6 +102,72 @@ class ApiController extends Controller
         return response()->json([]);
     }
 
+    public function apiSearch3(Request $request)
+    {
+    	$model_name = $request->model_name;
+    	$destination = $request->destination;
+    	$rental_id	= $request->rental_id;
+    	$start_date	= $request->start_date;
+    	$end_date	= $request->end_date;
+    	
+    	if ($model_name) {
+    		$car =  Car::getQuery();
+    		$car->select('cars.*','carmodels.*','car_prices.*','cars.id as idmobil')
+    			->whereNotIn('cars.id', function($query) use ($start_date,$end_date){
+	    		  	$query->select('bookings.car_id')
+					      ->distinct()
+					      ->from('bookings')
+	        			  ->join('cars', function ($join){
+				        	$join->on('bookings.car_id', '=', 'cars.id');
+				          })
+					      ->where('bookings.date_rent', '<=' , $end_date)
+					      ->where('bookings.date_return', '>=' , $start_date);
+				})
+    			->join('carmodels', function ($join){
+		            $join->on('cars.carmodel_id', '=', 'carmodels.id');
+	        	})
+	    		->join('car_prices', function ($join) use ($destination){
+		            $join->on('cars.id', '=', 'car_prices.car_id')
+			             ->where('car_prices.destination', '=', $destination);
+		        })
+				->where( function ($query) use ($model_name){
+			        $query->where('carmodels.brand', 'like', '%' . $model_name . '%')
+			              ->orWhere('carmodels.model', 'like', '%' . $model_name . '%');
+			    })
+				->where('cars.status', '=', '1');
+			    ;
+	     		
+
+	         $items = $car->get();
+	         foreach ($items as $item) {
+	         	$newarray[] = array(
+		         			"id" => $item->idmobil,
+						    "created_at"  => $item->created_at,
+						    "updated_at" => $item->updated_at,
+						    "carmodel_id" => $item->carmodel_id,
+						    "plate_number" => $item->plate_number,
+						    "brand" => $item->brand,
+						    "model" => $item->model,
+						    "transmission" => $item->transmission,
+						    "fuel" => $item->fuel,
+						    "car_id" => $item->car_id,
+						    "destination" => $item->destination,
+						    "price" => $item->price,
+						    "year" => $item->year,
+						    "rental_id" => intval($rental_id),
+					    	"start_date" => $start_date,
+					    	"end_date" => $end_date,
+	         				);
+	         }
+	         return response()->json($newarray);
+
+
+    	}
+
+        return response()->json([]);
+    }
+
+
     public function apiBooking(Request $request)
     {
 

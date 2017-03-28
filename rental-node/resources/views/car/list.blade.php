@@ -20,6 +20,7 @@
         <th>Fuel</th>
         <th>Year</th>
         <th>Action</th>
+        <th>Available</th>
       </tr>
     </thead>
   </table>
@@ -47,7 +48,42 @@ $('#itemTable').DataTable( {
           return datatableEdit({!! json_encode(action("CarController@listItem")) !!} + "/" + data.id + "/update") +
                   datatableDelete({!! json_encode(action("CarController@listItem")) !!} + "/" + data.id + "/delete")
         }
+      },
+      {"data": function(data) {
+          if(data.status == '1'){
+            return '<span class="glyphicon glyphicon-ok" aria-hidden="true"></span> YES';
+          }else{
+            return '<span class="glyphicon glyphicon-ban-circle" aria-hidden="true"></span> NO';
+          }
+        }
+      },
+    ],
+    "createdRow": function( row, data, dataIndex ) {
+      if ( data.status == "0" ) {
+        $(row).addClass( 'danger' );
       }
+    },
+    "columnDefs": [
+      {
+        "targets": 8,
+        "createdCell": function (td, cellData, rowData, row, col) {
+          if ( cellData == '<span class="glyphicon glyphicon-ok" aria-hidden="true"></span> YES' ) {
+            $(td).addClass('text-center').css({
+                                              "background": "#16a085",
+                                              "color": "#fff",
+                                              "font-weight": "bold",
+                                              "vertical-align": "middle",
+                                          })
+          }else{
+            $(td).addClass('text-center').css({
+                                              "background": "#c0392b",
+                                              "color": "#fff",
+                                              "font-weight": "bold",
+                                              "vertical-align": "middle",
+                                          })
+          }
+        }
+      },
     ]
 } );
 </script>

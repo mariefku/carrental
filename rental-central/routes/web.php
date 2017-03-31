@@ -15,11 +15,12 @@ Route::get('/', function () {
     return redirect('/search');
 });
 Route::get('/admin', function () {
-    return redirect('/admin/carmodels');
+    return redirect('/admin/bookings');
 });
 
 
-Route::get('/search', 'SearchController@searchCar');
+Route::get('/search', 'SearchController@searchForm');
+Route::get('/search/result', 'SearchController@searchCar');
 Route::post('/search/datatable', 'SearchController@datatable');
 Route::get('/search/{id_r}/book/{id_c}/{id_d}', 'SearchController@book');
 
@@ -39,6 +40,12 @@ Route::get('/admin/rentals/{id}/update', 'RentalController@updateForm');
 Route::post('/admin/rentals/{id}/update', 'RentalController@updateItem');
 Route::post('/admin/rentals/{id}/delete', 'RentalController@deleteItem');
 
+Route::get('/bookings', function () {
+    return redirect('/search');
+});
 Route::post('/bookings', 'BookingController@createForm');
 Route::post('/bookings/confirm', 'BookingController@confirmItem');
 Route::post('/bookings/confirmed', 'BookingController@storeItem');
+
+Route::get('/admin/bookings', 'BookingController@listItem');
+Route::post('/admin/bookings/datatable', 'BookingController@datatable');

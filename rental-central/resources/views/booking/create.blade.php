@@ -4,7 +4,7 @@
 
 
 
-<div class="panel panel-default">
+<div class="panel panel-success">
 
   <div class="panel-heading">
     <h3 class="panel-title">Data Pemesanan</h3>
@@ -94,7 +94,7 @@
     </div>
 
     <div class="panel-footer text-right">
-        <button type="submit" class="btn btn-success">Lanjutkan Pemesanan</button>
+        <button type="submit" class="btn btn-raised btn-success">Lanjutkan Pemesanan</button>
     </div>
 
   </form>

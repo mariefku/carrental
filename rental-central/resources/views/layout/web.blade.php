@@ -12,14 +12,23 @@
 
     <title>Rental Central</title>
 
+    <!-- Material Design fonts -->
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Roboto:300,400,500,700">
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/icon?family=Material+Icons">
+
     <!-- Bootstrap core CSS -->
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/bootstrap-datepicker3.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/datatables.min.css') }}" rel="stylesheet">
 
+    <!-- Bootstrap Material Design -->
+    <link rel="stylesheet" type="text/css" href="{{ asset('material-design/css/bootstrap-material-design.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('material-design/css/ripples.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('material-design/dropdown/jquery.dropdown.css') }}">
+    
+
     <style>
       body {
-        padding-top: 20px;
         padding-bottom: 20px;
       }
 
@@ -64,36 +73,37 @@
 
   <body>
 
-    <div class="container">
-
-      <!-- Static navbar -->
-      <nav class="navbar navbar-default">
-        <div class="container-fluid">
-          <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-              <span class="sr-only">Rental Central - Search</span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="#">Rental Central</a>
-          </div>
-          <div id="navbar" class="navbar-collapse collapse">
-            <ul class="nav navbar-nav">
+    <!-- Static navbar -->
+    <nav class="navbar navbar-primary">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Rental Central - Search</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">Rental Central</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
 <!--           
-              <li><a href="{{ action('DestinationController@listItem') }}">Destination</a></li>
-              <li><a href="{{ action('RentalController@listItem') }}">Rental</a></li> -->
-            </ul>
-          </div><!--/.nav-collapse -->
-        </div><!--/.container-fluid -->
-      </nav>
+            <li><a href="{{ action('DestinationController@listItem') }}">Destination</a></li>
+            <li><a href="{{ action('RentalController@listItem') }}">Rental</a></li> -->
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div><!--/.container-fluid -->
+    </nav>
 
+    @yield('content.fullpage')
+
+    <div class="container">
+      
       <div class="container">
         @yield('content')
       </div>
 
     </div> <!-- /container -->
-
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
@@ -102,7 +112,11 @@
     <script src="{{ asset('js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('js/bootstrap-datepicker.min.js') }}"></script>
     <script src="{{ asset('js/datatables.min.js') }}"></script>
+    <script src="{{ asset('material-design/js/ripples.min.js') }}"></script>
+    <script src="{{ asset('material-design/js/material.min.js') }}"></script>
+    <script src="{{ asset('material-design/dropdown/jquery.dropdown.js') }}"></script>
     <script>
+      $.material.init();
       $.fn.datepicker.defaults.format = "dd/mm/yyyy";
       $.fn.datepicker.dates['en'] = {
           days: ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"],
@@ -140,7 +154,7 @@
                                 end_date
                             )
       {
-        return '<form class="list-action" method="post" action="' + url + '">' +
+        return '<form class="list-action" method="post" action="../' + url + '">' +
                 '{{ csrf_field() }}' +
                   '<input type="hidden" name="id" value="' + id + '">' +
                   '<input type="hidden" name="created_at" value="' + created_at + '">' +
@@ -158,7 +172,7 @@
                   '<input type="hidden" name="rental_id" value="' + rental_id + '">' +
                   '<input type="hidden" name="start_date" value="' + start_date + '">' +
                   '<input type="hidden" name="end_date" value="' + end_date + '">' +
-                  '<button type="submit" class="btn btn-warning">Book</button>' +
+                  '<button type="submit" class="btn btn-raised btn-warning">Book</button>' +
                '</form>'
       }
       function datatableDelete(url)

@@ -185,6 +185,8 @@ class ApiController extends Controller
 	        $booking->destination = $request->destination;
 	        $booking->price = $request->price;
 	        $booking->year = $request->year;
+	        $booking->date_rent = $request->start_date;
+	        $booking->date_return = $request->end_date;
 	        $booking->save();
 
 	         return response('<span style="color:green;"><strong>Success from node-1 !!<strong></span>');

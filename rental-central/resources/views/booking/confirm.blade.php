@@ -1,6 +1,6 @@
 @extends('layout.web')
 
-@section('content')
+@section('content.fullpage')
 
 <form class="form-horizontal" action="{{ action('BookingController@storeItem') }}" method="post">
   {{ csrf_field() }}
@@ -30,7 +30,7 @@
   <input type="hidden" name="tahun"         value="{{ $items-> tahun }}">
 
   <div class="col-sm-6">
-    <div class="panel panel-default">
+    <div class="panel panel-warning">
       <div class="panel-heading">
         <h3 class="panel-title">Data Pemesanan</h3>
       </div>
@@ -65,12 +65,12 @@
           </div>   
       </div>
       <div class="panel-footer text-right">
-          <button type="button" class="btn btn-warning">Ubah Data</button>
+          <button type="button" class="btn btn-raised btn-warning">Ubah Data</button>
       </div>
     </div>
   </div>
   <div class="col-sm-6">
-    <div class="panel panel-default">
+    <div class="panel panel-success">
       <div class="panel-heading">
         <h3 class="panel-title">Data Kendaraan</h3>
       </div>
@@ -130,7 +130,7 @@
           </div>
       </div>
       <div class="panel-footer text-right">
-            <button type="submit" class="btn btn-success ">Lanjutkan Pemesanan</button>
+            <button type="submit" class="btn btn-raised btn-success ">Lanjutkan Pemesanan</button>
       </div>
     </div>
   </div>

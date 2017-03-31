@@ -18,6 +18,11 @@ class BookingController extends Controller
         return view('booking.list')->with('items', $items);
     }
 
+    public function datatable(Request $request)
+    {
+        return Datatables::eloquent(Booking::query())->make(true);
+    }
+
     public function createForm(Request $request)
     {
         $databooks = $request;
@@ -112,6 +117,8 @@ class BookingController extends Controller
         $item->destination = $request->destination;
         $item->price = $request->price;
         $item->year = $request->year;
+        $item->date_rent = $request->start_date;
+        $item->date_return = $request->end_date;
         $item->save();
 
         $local = '<strong> Local Save = </strong> <span style="color:red;"><strong>Failed !!</strong></span>';
@@ -158,7 +165,9 @@ class BookingController extends Controller
                         "car_id" => $item->car_id,
                         "destination" => $item->destination,
                         "price" => $item->price,
-                        "year" => $item->year
+                        "year" => $item->year,
+                        "start_date" => $item->start_date,
+                        "end_date" => $item->end_date
                     ]
                 ]);
 

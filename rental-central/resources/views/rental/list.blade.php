@@ -5,7 +5,7 @@
   <div class="list-main-btn">
     <div class="row">
       <div class="col-sm-4">
-        <a href="{{ action('RentalController@createForm') }}" class="btn btn-success">Add Item</a>
+        <a href="{{ action('RentalController@createForm') }}" class="btn btn-raised btn-success">Add Item</a>
       </div>
     </div>
   </div>
@@ -23,6 +23,8 @@
 
 @section('content.js')
 <script>
+$('#rental').addClass('active');
+
 $('#itemTable').DataTable( {
     "processing": true,
     "serverSide": true,

@@ -72,8 +72,18 @@ class SearchController extends Controller
         return $result;
     }
 
+    public function searchForm()
+    {
+        return view('search.search');
+    }
+
     public function searchCar(Request $request)
     {
+
+        $this->validate($request, [
+            'model_name' => 'required',
+        ]);
+
         $model_name = $request->model_name;
         if ($model_name == null)
             $model_name = [];
@@ -96,7 +106,7 @@ class SearchController extends Controller
 
         \Session::flash('data', $datas);
 
-        return view('search.search')
+        return view('search.result')
             ->with('items', $items)
             ->with('model_name', $model_name)
             ->with('destination', $destination);

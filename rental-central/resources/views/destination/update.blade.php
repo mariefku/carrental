@@ -23,10 +23,15 @@
     ])
 
     <div class="form-group">
-      <button type="submit" class="btn btn-primary">Simpan</button>
+      <button type="submit" class="btn btn-raised btn-primary">Simpan</button>
     </div>
     {!!
       Form::close()
     !!}
   </div>
+@endsection
+@section('content.js')
+<script>
+$('#destination').addClass('active');
+</script>
 @endsection

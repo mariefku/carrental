@@ -1,9 +1,9 @@
-<div class="form-group">
+<div class="form-group" @if(isset($formStyle)) style="{{ $formStyle }}" @endif>
 	@if (isset($label))
 		<label
-			for="{{ $field }}" class="control-label"
+			for="{{ $field }}" class="control-label" @if(isset($labelStyle)) style="{{ $labelStyle }}" @endif
 		>
-			{{ $label }}
+			{!! $label !!}
 		</label>
 	@endif
 	<div class="control-input 

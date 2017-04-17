@@ -13,5 +13,4 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::post('/destinations', 'DestinationController@apiListItem');
-Route::post('/destinations/{id}', 'DestinationController@apiShowItem');
+Route::get('/{filename}/getPhoto', 'PhotosController@getPhoto');

@@ -19,6 +19,9 @@ class CreateRentalsTable extends Migration
 
             $table->string('name');
             $table->string('url');
+            $table->double('lat',20,10);
+            $table->double('lng',20,10);
+            $table->string('address');            
         });
     }
 

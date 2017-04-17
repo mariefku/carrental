@@ -10,6 +10,7 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+Auth::routes();
 
 Route::get('/', function () {
     return redirect('/search');
@@ -43,9 +44,18 @@ Route::post('/admin/rentals/{id}/delete', 'RentalController@deleteItem');
 Route::get('/bookings', function () {
     return redirect('/search');
 });
-Route::post('/bookings', 'BookingController@createForm');
+Route::get('/bookings/form', function () {
+    return redirect('/search');
+});
+Route::post('/bookings', 'BookingController@viewItem');
+Route::post('/bookings/form', 'BookingController@createForm');
 Route::post('/bookings/confirm', 'BookingController@confirmItem');
+Route::post('/bookings/update', 'BookingController@updateItem');
 Route::post('/bookings/confirmed', 'BookingController@storeItem');
+Route::post('/bookings/printPDF', 'BookingController@printPDF');
+Route::get('/bookings/viewPDF/{kode_booking}', 'BookingController@viewPDF');
+Route::get('/bookings/{filename}/getPhoto', 'PhotosController@getPhoto')->name('ktp.getPhoto');
 
 Route::get('/admin/bookings', 'BookingController@listItem');
+Route::get('/admin/bookings/{kode_booking}/detail', 'BookingController@detailItem');
 Route::post('/admin/bookings/datatable', 'BookingController@datatable');

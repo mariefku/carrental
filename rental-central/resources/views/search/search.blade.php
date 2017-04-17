@@ -1,5 +1,19 @@
 @extends('layout.web')
 
+@section('content.fullpage')
+
+  @if (session('error'))
+    <div class="col-sm-12">
+      <div class="alert alert-dismissible alert-danger">
+        <button type="button" class="close" data-dismiss="alert">×</button>
+        <strong>Terjadi Kesalahan!</strong>
+        {{ session('error') }}
+      </div>
+    </div>
+  @endif
+
+@endsection
+
 @section('content')
 
   <div class="panel panel-info">
@@ -36,7 +50,7 @@
         ])
       </div>
 
-      <div class="col-sm-6">
+      <div class="col-sm-6" style="border-left: 1px solid #03a9f4;">
         @include('form.date', [
           'field' => '',
           'label' => '<i class="material-icons">today</i> TANGGAL BERANGKAT',
@@ -84,7 +98,7 @@
   @if ( app('request')->input('start_date') == null || app('request')->input('end_date') == null )
     var start_date = new Date();
     var end_date = new Date();
-        end_date.setDate(end_date.getDate() + 1);
+        //end_date.setDate(end_date.getDate() + 1);
   @else
     var start_date=new Date("{!! app('request')->input('start_date') !!}");
     var end_date = new Date("{!! app('request')->input('end_date') !!}");

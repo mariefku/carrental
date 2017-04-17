@@ -26,6 +26,8 @@ class RentalController extends Controller
         $this->validate($request, [
             'name' => 'required',
             'url' => 'required|url',
+            'lat' => 'required',
+            'lng' => 'required',            
         ]);
 
         $item = new Rental();
@@ -46,6 +48,8 @@ class RentalController extends Controller
         $this->validate($request, [
             'name' => 'required',
             'url' => 'required|url',
+            'lat' => 'required',
+            'lng' => 'required',     
         ]);
 
         $item = Rental::find($id);

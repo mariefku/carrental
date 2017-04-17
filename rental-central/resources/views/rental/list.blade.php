@@ -15,6 +15,9 @@
         <th>ID</th>
         <th>Name</th>
         <th>URL</th>
+        <th>Latitude</th>
+        <th>Longitude</th>
+        <th>Alamat</th>
         <th>Action</th>
       </tr>
     </thead>
@@ -36,6 +39,9 @@ $('#itemTable').DataTable( {
       {"data": "id"},
       {"data": "name"},
       {"data": "url"},
+      {"data": "lat"},
+      {"data": "lng"},
+      {"data": "address"},
       {
         "data": null,
         "sortable": false,
@@ -44,6 +50,9 @@ $('#itemTable').DataTable( {
                   datatableDelete({!! json_encode(action("RentalController@listItem")) !!} + "/" + data.id + "/delete")
         }
       }
+    ],
+    "columnDefs": [
+      { "width": "15%", "targets": 6 }
     ]
 } );
 </script>

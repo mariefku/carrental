@@ -154,6 +154,26 @@ class LengthAwarePaginator extends AbstractPaginator implements Arrayable, Array
     }
 
     /**
+     * Get the first page URL.
+     *
+     * @return int
+     */
+    public function firstPageUrl()
+    {
+        return $this->url( '1' );
+    }
+
+    /**
+     * Get the last page URL.
+     *
+     * @return int
+     */
+    public function lastPageUrl()
+    {
+        return $this->url( $this->lastPage() );
+    }
+
+    /**
      * Get the instance as an array.
      *
      * @return array

@@ -16,11 +16,18 @@ class CreateBookingsTable extends Migration
         Schema::create('bookings', function (Blueprint $table) {
             $table->increments('id');
 
+            $table->string('kode_booking');
+
             $table->string('rental_id');
             $table->string('nama');
             $table->string('nohp');
             $table->string('email');
             $table->date('tanggal_lahir');
+            
+            $table->string('alamat');
+            $table->string('noktp');
+            $table->string('fotoktp');
+
             $table->string('car_id');
             $table->string('brand');
             $table->string('model');
@@ -31,6 +38,8 @@ class CreateBookingsTable extends Migration
             $table->string('year');
             $table->date('date_rent');
             $table->date('date_return');
+
+            $table->string('status');
 
             $table->timestamps();
         });

@@ -71,67 +71,105 @@
       !!}
     </div>
   </div>
+         
 
-  <div class="col-sm-9">
-    <table class="table table-hover table-striped" id="itemTable">
-      <thead>
-        <tr>
-          <th>Brand</th>
-          <th>Model</th>
-          <th>Transmission</th>
-          <th>Fuel</th>
-          <th>Year</th>
-          <th>Harga</th> 
-          <th>Action</th>
-        </tr>
-      </thead>
-    </table>
+  <div class="col-md-9">
+      <div class="filter-page__content">
+          <div class="filter-item-wrapper">
+
+          @foreach ($pager as $data)                            
+            <!-- ITEM -->
+            <div class="hotel-item">
+                <div class="item-media">
+                    <div class="image-cover">
+                        <img src="{{ $data->img_url }}" alt="">
+                    </div>
+                </div>
+                <div class="item-body">
+                    <div class="item-title">
+                        <h2>
+                            <a href="#">{{ $data->brand }} {{ $data->model }}</a>
+                        </h2>
+                    </div>
+                    <!-- div class="item-hotel-star">
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                    </div -->
+                    <div class="item-address">
+                        <i class="awe-icon awe-icon-marker-2"></i>
+                        {{ \App\Rental::find($data->rental_id)->name }}
+                    </div>
+                    <div class="item-footer">
+                        <div class="item-rate">
+                            <span>{{ $data->year }}</span>
+                        </div>
+
+                        @php
+                          $transmission = "Automatic Transmission";
+                          if ( $data->transmission == "MT" ){
+                            $transmission = "Manual Transmission";
+                          }
+                        @endphp
+
+                        <div class="item-icon">
+                            <i class="material-icons" style="font-size: 18px;position: relative;top: 3px;" title="Fuel">local_gas_station</i> {{ $data->fuel }}
+                            <i class="fa fa-sitemap" aria-hidden="true" title="{{ $transmission }}"></i> {{ $data->transmission }}
+                            <i class="awe-icon awe-icon-gym"></i>
+                            <i class="awe-icon awe-icon-car"></i>
+                            <i class="awe-icon awe-icon-food"></i>
+                            <i class="awe-icon awe-icon-level"></i>
+                            <i class="awe-icon awe-icon-wifi"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="item-price-more">
+                    <div class="price" style="padding-top: 30px;">
+                        price
+                        <span class="amount">{{ currency($data->price * $numberofdays) }}</span>
+                    </div>
+                  <form action="../bookings" method="post" style="margin-top: 35px;">
+                    {{ csrf_field() }}
+                    <div>
+                    <input type="hidden" name="id"            value="{{ $data->id }}">
+                    <input type="hidden" name="created_at"    value="{{ $data->created_at }}">
+                    <input type="hidden" name="updated_at"    value="{{ $data->updated_at }}">
+                    <input type="hidden" name="carmodel_id"   value="{{ $data->carmodel_id }}">
+                    <input type="hidden" name="plate_number"  value="{{ $data->plate_number }}">
+                    <input type="hidden" name="brand"         value="{{ $data->brand }}">
+                    <input type="hidden" name="model"         value="{{ $data->model }}">
+                    <input type="hidden" name="transmission"  value="{{ $data->transmission }}">
+                    <input type="hidden" name="fuel"          value="{{ $data->fuel }}">
+                    <input type="hidden" name="car_id"        value="{{ $data->car_id }}">
+                    <input type="hidden" name="destination"   value="{{ $data->destination }}">
+                    <input type="hidden" name="price"         value="{{ $data->price * $numberofdays }}">
+                    <input type="hidden" name="year"          value="{{ $data->year }}">
+                    <input type="hidden" name="rental_id"     value="{{ $data->rental_id }}">
+                    <input type="hidden" name="start_date"    value="{{ $data->start_date }}">
+                    <input type="hidden" name="end_date"      value="{{ $data->end_date }}">
+                    <input type="hidden" name="img_url"       value="{{ $data->img_url }}">
+                    </div>
+                    <button type="submit" class="awe-btn">Book Now</button>
+                  </form>
+                </div>
+            </div>
+            <!-- END / ITEM -->
+          @endforeach
+          
+          <!-- PAGINATION -->
+            {!! $pager->appends(app('request')->except('page'))->render() !!}
+          <!-- END / PAGINATION -->
+
+      </div>
   </div>
+</div>
 
 @endsection
 
 @section('content.js')
 <script>
-$('#itemTable').DataTable( {
-    "ajax": {
-        "url": {!! json_encode(action("SearchController@datatable")) !!},
-        "type": "POST"
-    },
-    "searching":   false,
-    "lengthChange": false,
-    "columns": [
-      {"data": "brand"},
-      {"data": "model"},
-      {"data": "transmission"},
-      {"data": "fuel"},
-      {"data": "year"},
-      {"data": "price"},
-      {
-        "data": null,
-        "sortable": false,
-        "render": function(data) {
-          return datatableBook( "bookings",
-                                data.id,
-                                data.created_at,
-                                data.updated_at,
-                                data.carmodel_id,
-                                data.plate_number,
-                                data.brand,
-                                data.model,
-                                data.transmission,
-                                data.fuel,
-                                data.car_id,
-                                data.destination,
-                                data.price,
-                                data.year,
-                                data.rental_id,
-                                data.start_date,
-                                data.end_date
-                                )
-        }
-      }
-    ]
-} );
 
 //$(".select").dropdown({"optionClass": "withripple"});
 $(".select").dropdown({ "autoinit" : ".select" });
@@ -155,7 +193,7 @@ $('#show_start_date').datepicker({
 $('#show_end_date').datepicker({
     format: 'DD, dd MM yyyy',
     autoclose: true,
-}).datepicker("setDate", end_date).datepicker("setStartDate", end_date);
+}).datepicker("setDate", end_date).datepicker("setStartDate", new Date());
 
 
 //set hidden value from bootstrap datepicker

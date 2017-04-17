@@ -6,6 +6,8 @@
     "type": "project",
     "require": {
         "php": ">=5.6.4",
+        "anhskohbo/no-captcha": "^2.3",
+        "barryvdh/laravel-dompdf": "^0.8.0",
         "guzzlehttp/guzzle": "~6.0",
         "laravel/framework": "5.4.*",
         "laravel/tinker": "~1.0",
@@ -23,7 +25,10 @@
         ],
         "psr-4": {
             "App\\": "app/"
-        }
+        },
+        "files": [
+            "app/Http/helper.php"
+        ]
     },
     "autoload-dev": {
         "psr-4": {

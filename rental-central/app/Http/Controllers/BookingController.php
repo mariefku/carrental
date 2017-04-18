@@ -47,14 +47,18 @@ class BookingController extends Controller
         //GET CAR IMAGE
         $rental = \App\Rental::find($items->rental_id);
         $result_img = [];
+        $status = [];
         if ($rental) {
             try {
                 $client = new \GuzzleHttp\Client();
                 $res = $client->request('GET', $rental->url . '/api/getCarImage?car_id='.$items->car_id);
-                
+                $res2 = $client->request('GET', $rental->url . '/api/getStatus?kode_booking='.$kode_booking);
+
                 $status = $res->getStatusCode();
-                if($status == 200){
+                $status2 = $res->getStatusCode();
+                if($status == 200 && $status2 == 200){
                     $result = $res->getBody();
+                    $result2 = $res2->getBody();
                 }else{
                     throw new \Exception('<span style="color:red;"><strong>Failed Server Respond!!</strong></span>');
                 }
@@ -63,9 +67,31 @@ class BookingController extends Controller
             }
 
             $result_img = json_decode($result);
+            $status = json_decode($result2);
         }
 
-        return view('booking.detail')->with('items', $items)->with('img_url',$result_img);
+        foreach ($status as $status) {
+
+            if ($status == "1"){
+                $status = "NEW BOOKING";
+            }elseif ($status == "2") {
+                $status = "CONFIRMED";
+            }elseif ($status == "3") {
+                $status = "REJECTED";
+            }elseif ($status == "4") {
+                $status = "CANCELED";
+            }else{
+                $status = "";
+            }
+
+        }
+
+        if ($status == null){
+            $status = "";
+        }
+
+
+        return view('booking.detail')->with('items', $items)->with('img_url',$result_img)->with('status',$status);
     }
 
     public function viewConfirmed()
@@ -294,7 +320,7 @@ class BookingController extends Controller
                                                 'data' => $request,
                                                 'kode_booking' => $newkode_booking
                                             ])
-                                    ->setPaper('a5', 'landscape')
+                                    ->setPaper('a4', 'potrait')
                                     ->setWarnings(false)
                                     ->save('storage/bookings-pdf/booking-'.$newkode_booking.'.pdf');
 

@@ -6,7 +6,7 @@ function currency($value, $locale = null) {
     $formater = new NumberFormatter('$locale', NumberFormatter::CURRENCY);
     $formater->setTextAttribute(NumberFormatter::CURRENCY_CODE, "Rp ");
    
-    $formater->setAttribute(NumberFormatter::FRACTION_DIGITS, 2);
+    $formater->setAttribute(NumberFormatter::FRACTION_DIGITS, 0);
     $form = $formater->format($value);
     $a = array( ",", ".", "koma" );
     $b = array( "koma", ",", "." );

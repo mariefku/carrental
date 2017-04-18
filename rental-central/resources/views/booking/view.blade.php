@@ -109,6 +109,11 @@
                                     <br>
                                     <p>{{ App\Rental::find($databooks->rental_id)->address }}</p>
                                 </div>
+                                <div class="product-descriptions">
+                                    <strong>No. Telepon:</strong>
+                                    <br>
+                                    <p>{{ App\Rental::find($databooks->rental_id)->telp }}</p>
+                                </div>
                             </div>
                             <a href="" id="opengmaps" target="_blak">
                             <div class="product-map" id="map-canvas" style="height: 330px;">

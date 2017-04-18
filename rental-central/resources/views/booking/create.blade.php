@@ -75,7 +75,7 @@
           <div class="form-group">
             <label for="nohp" class="col-sm-12 control-label">Nomor Telepon/HP</label>
             <div class="col-sm-12">
-              <input type="text" class="form-control" id="nohp" placeholder="Contoh: 08123456789" name="nohp" value="{{ old('nohp') }}" required>
+              <input type="number" class="form-control" id="nohp" placeholder="Contoh: 08123456789" name="nohp" value="{{ old('nohp') }}" maxlength="12" onkeypress="return isNumeric(event)" oninput="maxLengthCheck(this)" required>
               <br>
             </div>
           </div>
@@ -130,7 +130,7 @@
           <div class="form-group">
             <label for="noktp" class="col-sm-12 control-label">Nomor KTP</label>
             <div class="col-sm-12">
-              <input type="number" class="form-control" id="noktp" placeholder="" name="noktp" value="{{ old('noktp') }}" required>
+              <input type="number" class="form-control" id="noktp" placeholder="" name="noktp" value="{{ old('noktp') }}" maxlength="16" onkeypress="return isNumeric(event)" oninput="maxLengthCheck(this)" required>
               <span class="help-block small mb-0">Isi dengan Nomor KTP anda</span>
               <br>
             </div>

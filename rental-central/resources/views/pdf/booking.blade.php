@@ -96,6 +96,21 @@
 						<td>:</td>
 						<td style="text-transform: uppercase;">{{ $data->fuel }}</td>
 					</tr>
+					<tr>
+						<th>Rental</th>
+						<td>:</td>
+						<td style="text-transform: uppercase;">{{ App\Rental::find($data->rental_id)->name }}</td>
+					</tr>
+					<tr>
+						<th>Alamat</th>
+						<td>:</td>
+						<td style="text-transform: uppercase;">{{ App\Rental::find($data->rental_id)->address }}</td>
+					</tr>
+					<tr>
+						<th>No. Telepon</th>
+						<td>:</td>
+						<td style="text-transform: uppercase;">{{ App\Rental::find($data->rental_id)->telp }}</td>
+					</tr>
 				</tbody>
 			</table>
 		</div>

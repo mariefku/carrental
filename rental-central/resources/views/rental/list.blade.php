@@ -15,9 +15,8 @@
         <th>ID</th>
         <th>Name</th>
         <th>URL</th>
-        <th>Latitude</th>
-        <th>Longitude</th>
         <th>Alamat</th>
+        <th>No. Telp</th>
         <th>Action</th>
       </tr>
     </thead>
@@ -39,9 +38,8 @@ $('#itemTable').DataTable( {
       {"data": "id"},
       {"data": "name"},
       {"data": "url"},
-      {"data": "lat"},
-      {"data": "lng"},
       {"data": "address"},
+      {"data": "telp"},
       {
         "data": null,
         "sortable": false,
@@ -52,7 +50,7 @@ $('#itemTable').DataTable( {
       }
     ],
     "columnDefs": [
-      { "width": "15%", "targets": 6 }
+      { "width": "15%", "targets": 5 }
     ]
 } );
 </script>

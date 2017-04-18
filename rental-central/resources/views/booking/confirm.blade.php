@@ -168,6 +168,14 @@
             </div>
             <div class="form-group">
                 <div class="form-elements">
+                    <label>No. Telepon</label>
+                    <div class="form-item">
+                        <span>{{ App\Rental::find($items->rental_id)->telp }}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="form-elements">
                     <label>Destination</label>
                     <div class="form-item">
                         <input type="text" class="awe-calendar" value=" {{ $items->destination }} " disabled="">

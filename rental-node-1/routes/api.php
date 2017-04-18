@@ -16,3 +16,4 @@ use Illuminate\Http\Request;
 Route::post('/search', 'ApiController@apiSearch');
 Route::post('/booking', 'ApiController@apiBooking');
 Route::get('/getCarImage', 'ApiController@apiGetCarImage');
+Route::get('/getStatus', 'ApiController@apiGetStatus');

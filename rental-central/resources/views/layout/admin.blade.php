@@ -202,6 +202,7 @@
             '<button type="submit" class="btn btn-raised btn-danger btn-xs" title="Delete"><i class="material-icons">delete_forever</i></button>' +
           '</form>'
       }
+
     </script>
     @yield('content.js')
   </body>

@@ -24,7 +24,10 @@ Terdapat booking baru dengan kode booking :
 | <strong> Tanggal Pinjam </strong>   | : | {{ $booking->start_date }}     				 |
 | <strong> Tanggal Kembali </strong>  | : | {{ $booking->end_date }}     				 |
 | <strong> Total Tagihan </strong>    | : | {{ currency($booking->price) }}				 |
-
+| 						              |  |      										 |
+| <strong> Rental </strong>  		  | : | {{ App\Rental::find($booking->rental_id)->name }}  |
+| <strong> Alamat </strong>  		  | : | {{ App\Rental::find($booking->rental_id)->address }}  |
+| <strong> No. Telp </strong>  		  | : | {{ App\Rental::find($booking->rental_id)->telp }}  |
 @endcomponent
 <hr>
 

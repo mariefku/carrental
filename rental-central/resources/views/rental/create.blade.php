@@ -75,6 +75,15 @@
     </div>
 
     <div class="col-sm-12">
+      @include('form.text', [
+        'field' => 'telp',
+        'label' => 'No. Telp',
+        'placeholder' => 'no. telp',
+        'default' => old('telp'),
+      ])
+    </div>
+
+    <div class="col-sm-12">
       <div class="form-group">
         <button type="submit" class="btn btn-raised btn-primary">Simpan</button>
       </div>

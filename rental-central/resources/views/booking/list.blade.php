@@ -25,8 +25,7 @@
 $('#booking').addClass('active');
 
 $('#itemTable').DataTable( {
-    "processing": true,
-    "serverSide": true,
+
     "ajax": {
         "url": {!! json_encode(action("BookingController@listItem")) !!} + "/datatable",
         "type": "POST"

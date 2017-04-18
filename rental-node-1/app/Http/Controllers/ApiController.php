@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use App\Carmodel;
 use App\Car;
 use App\Booking;
-use App\BookingHistory;
 use App\CarImage;
 
 class ApiController extends Controller
@@ -136,6 +135,17 @@ class ApiController extends Controller
     	if ($car_id) {
     		$car = Car::where('id', '=', $car_id)->pluck('img');		
 	        return response()->json($car);
+    	}
+
+        return response()->json([]);
+    }
+
+    public function apiGetStatus(Request $request) {
+		$kode_booking = $request->kode_booking;
+    	
+    	if ($kode_booking) {
+    		$status = Booking::where('kode_booking', '=', '#'.$kode_booking)->pluck('status');		
+	        return response()->json($status);
     	}
 
         return response()->json([]);

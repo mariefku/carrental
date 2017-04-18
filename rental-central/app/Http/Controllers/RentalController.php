@@ -27,7 +27,8 @@ class RentalController extends Controller
             'name' => 'required',
             'url' => 'required|url',
             'lat' => 'required',
-            'lng' => 'required',            
+            'lng' => 'required',
+            'telp' => 'required',           
         ]);
 
         $item = new Rental();
@@ -49,7 +50,8 @@ class RentalController extends Controller
             'name' => 'required',
             'url' => 'required|url',
             'lat' => 'required',
-            'lng' => 'required',     
+            'lng' => 'required',
+            'telp' => 'required',     
         ]);
 
         $item = Rental::find($id);

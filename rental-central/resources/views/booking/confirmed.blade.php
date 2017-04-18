@@ -34,10 +34,6 @@
     <hr> 
 @endsection
 @section('content')
-  
-  <div class="well">
-    {!! $response !!}
-  </div>
 
   <div class="col-sm-12">
     <div class="alert alert-dismissible alert-success">
@@ -101,6 +97,14 @@
                     <label>Alamat</label>
                     <div class="form-item">
                         <span>{{ App\Rental::find($items->rental_id)->address }}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="form-elements">
+                    <label>No. Telepon</label>
+                    <div class="form-item">
+                        <span>{{ App\Rental::find($items->rental_id)->telp }}</span>
                     </div>
                 </div>
             </div>

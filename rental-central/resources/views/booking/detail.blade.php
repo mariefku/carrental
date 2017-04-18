@@ -1,8 +1,47 @@
 @extends('layout.admin')
 
 @section('content.fullpage')
+@php
+
+  if ($status == "NEW BOOKING"){
+    $alert = "info";
+    $color = "#5bc0de";
+    $icon = "new_releases";
+  }elseif ($status == "CONFIRMED") {
+    $alert = "success";
+    $color = "#5cb85c";
+    $icon = "done";
+  }elseif ($status == "REJECTED") {
+    $alert = "danger";
+    $color = "#d9534f";
+    $icon = "highlight_off";
+  }elseif ($status == "CANCELED") {
+    $alert = "warning";
+    $color = "#ff5722";
+    $icon = "cancel";
+  }else{
+    $alert = "";
+    $color = "";
+    $icon = "";
+  }
+@endphp
+
+  <div class="col-sm-12">
+    <h2 style="font-weight: 700;color: {{ $color }};float: left;">DETAIL BOOKING {{ $items->kode_booking }}</h2>
+    <h2 style="font-weight: 700;color: {{ $color }};float: right;"><i class="material-icons" style="font-size: 28px;">{{ $icon }}</i> {{ $status }}</h2>
+    <hr style="clear: both;">
+  </div>
+
   <div class="col-sm-8">
-    <div class="panel panel-warning">
+
+    @if ($status != "")
+      <div class="alert alert-dismissible alert-{{ $alert }}">
+        <button type="button" class="close" data-dismiss="alert">×</button>
+        Status Booking untuk kode booking <strong> {{ $items->kode_booking }} </strong> adalah <strong style="color: #fbe8aa;">{{ $status }}  </strong>
+      </div>
+    @endif
+
+    <div class="panel panel-{{ $alert }}">
       <div class="panel-heading">
         <h3 class="panel-title">Data Pemesanan</h3>
       </div>
@@ -60,13 +99,13 @@
   </div>
   <div class="col-sm-4">
     <div class="detail-sidebar" style="margin: 0px;">
-        <div class="booking-info">
+        <div class="booking-info" style="border: 2px solid {{ $color }};">
             <h3>Booking info</h3>
             <div class="form-group">
                 <div class="form-elements">
                     <label>{{ $items-> brand }} {{ $items-> model }}</label>
                     <div class="form-item">
-                        <img src="{!! $img_url[0] !!}" alt="">
+                        <img src="@foreach ($img_url as $img) {{ $img }} @endforeach" alt="">
                     </div>
                 </div>
             </div>
@@ -113,7 +152,7 @@
             
             <div class="price">
                 <em>Total </em>
-                <span class="amount">{{ currency($items->price) }}</span>
+                <span class="amount" style="color: {{ $color }};">{{ currency($items->price) }}</span>
             </div>
 
         </div>

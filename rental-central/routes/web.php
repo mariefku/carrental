@@ -47,6 +47,9 @@ Route::get('/bookings', function () {
 Route::get('/bookings/form', function () {
     return redirect('/search');
 });
+Route::get('/bookings/confirmed', function () {
+    return redirect('/search');
+});
 Route::post('/bookings', 'BookingController@viewItem');
 Route::post('/bookings/form', 'BookingController@createForm');
 Route::post('/bookings/confirm', 'BookingController@confirmItem');

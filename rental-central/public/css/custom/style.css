@@ -4508,7 +4508,7 @@ body.single-post .blog-page__content > .post .post-content {
 .hotel-item .item-body {
   position: relative;
   padding: 18px 34px;
-  width: 48%;
+  width: 52%;
   float: left;
   overflow: hidden;
   overflow-x: auto;
@@ -4685,7 +4685,7 @@ body.single-post .blog-page__content > .post .post-content {
   position: relative;
   padding: 0 15px;
   margin: 20px 0;
-  width: 22%;
+  width: 18%;
   float: right;
   overflow: hidden;
   min-height: 150px;

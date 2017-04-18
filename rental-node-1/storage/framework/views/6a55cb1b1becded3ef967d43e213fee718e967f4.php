@@ -11,7 +11,6 @@
         <th>Tanggal Pinjam</th>
         <th>Tanggal Kembali</th>
         <th>Jumlah Pembayaran</th>
-        <th>Action</th>
         <th>Status</th>
       </tr>
     </thead>
@@ -23,8 +22,8 @@
 $('#booking').addClass('active');
 
 $('#itemTable').DataTable( {
-    "processing": true,
-    "serverSide": true,
+
+    
     "ajax": {
         "url": <?php echo json_encode(action("BookingController@newItem")); ?> + "/all",
         "type": "POST"
@@ -37,13 +36,6 @@ $('#itemTable').DataTable( {
       {"data": "date_rent"},
       {"data": "date_return"},
       {"data": "price"},
-      {
-        "data": null,
-        "sortable": false,
-        "render": function(data) {
-          return datatableDetail(<?php echo json_encode(action("BookingController@newItem")); ?> + "/" + data.kode_booking.replace("#", "") + "/detail")
-        }
-      },
       { 
         "sortable": false,
         "data": function(data) {
@@ -72,7 +64,7 @@ $('#itemTable').DataTable( {
     },
     "columnDefs": [
       {
-        "targets": 8,
+        "targets": 7,
         "createdCell": function (td, cellData, rowData, row, col) {
           if ( cellData == '<i class="fa fa-exclamation" aria-hidden="true"></i> NEW' ) {
             $(td).addClass('text-center').css({
@@ -106,7 +98,7 @@ $('#itemTable').DataTable( {
 
         }
       },
-      { "width": "12%", "targets": 8 },
+      { "width": "12%", "targets": 7 },
       { "width": "20%", "targets": 2 }
     ]
 } );

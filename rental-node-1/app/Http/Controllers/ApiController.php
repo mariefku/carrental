@@ -68,7 +68,7 @@ class ApiController extends Controller
 						    "destination" => $item->destination,
 						    "price" => $item->price,
 						    "year" => $item->year,
-						    "img_url" => $item->img,
+						    "img" => $item->img,
 						    "rental_id" => intval($rental_id),
 					    	"start_date" => $start_date,
 					    	"end_date" => $end_date,
@@ -89,6 +89,10 @@ class ApiController extends Controller
     		$check = Booking::where('car_id', $request->car_id)
                             ->where('date_rent', $request->start_date)
                             ->where('date_return', $request->end_date)
+                            ->where( function ($query) {
+						        $query->where('status', '1')
+						              ->orWhere('status', '2');
+						    })
                             ->get();
 
             if(count($check) > 0){

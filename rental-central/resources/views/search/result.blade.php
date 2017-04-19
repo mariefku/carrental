@@ -82,7 +82,8 @@
             <div class="hotel-item">
                 <div class="item-media">
                     <div class="image-cover">
-                        <img src="{{ $data->img_url }}" alt="">
+                        
+                        <img src="{{ App\Rental::find($data->rental_id)->url.$data->img  }}/getPhoto" alt="">
                     </div>
                 </div>
                 <div class="item-body">
@@ -130,7 +131,7 @@
                         price
                         <span class="amount">{{ currency($data->price * $numberofdays) }}</span>
                     </div>
-                  <form action="../bookings" method="post" style="margin-top: 35px;">
+                  <form action="{{ action('GuestBookingController@viewItem') }}" method="post" style="margin-top: 35px;">
                     {{ csrf_field() }}
                     <div>
                     <input type="hidden" name="id"            value="{{ $data->id }}">
@@ -149,7 +150,7 @@
                     <input type="hidden" name="rental_id"     value="{{ $data->rental_id }}">
                     <input type="hidden" name="start_date"    value="{{ $data->start_date }}">
                     <input type="hidden" name="end_date"      value="{{ $data->end_date }}">
-                    <input type="hidden" name="img_url"       value="{{ $data->img_url }}">
+                    <input type="hidden" name="img"       value="{{ $data->img }}">
                     </div>
                     <button type="submit" class="awe-btn">Book Now</button>
                   </form>

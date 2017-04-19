@@ -131,7 +131,7 @@
                             <div class="product-slider-wrapper">
                                 <div class="product-slider">
                                     <div class="item">
-                                        <img src="{{ $databooks-> img_url }}" alt="">
+                                        <img src="{{ App\Rental::find($databooks->rental_id)->url.$databooks->img  }}/getPhoto" alt="">
                                     </div>
                                 </div>
                             </div>
@@ -170,7 +170,7 @@
                                 </div>
                                 <div class="form-submit">
                                     <div class="add-to-cart">
-                                        <form action="bookings/form" method="post">
+                                        <form action="{{ action('GuestBookingController@createForm') }}" method="post">
                                         <div>
     {{ csrf_field() }}
     <input type="hidden" name="id"            value="{{ $databooks-> id }}">
@@ -189,7 +189,7 @@
     <input type="hidden" name="rental_id"     value="{{ $databooks-> rental_id }}">
     <input type="hidden" name="start_date"    value="{{ $databooks-> start_date }}">
     <input type="hidden" name="end_date"      value="{{ $databooks-> end_date }}">
-    <input type="hidden" name="img_url"      value="{{ $databooks-> img_url }}">
+    <input type="hidden" name="img"      value="{{ $databooks-> img }}">
                                         </div>    
     <button type="submit">
         Lanjutkan Pemesanan <i class="material-icons" style="font-size: 24px;position: relative;top: 7px;">arrow_forward</i>

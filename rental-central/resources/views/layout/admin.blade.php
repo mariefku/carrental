@@ -108,21 +108,28 @@
 
           <a class="navbar-brand" href="{{ url('/admin') }}">Rental Central - Admin</a>
         </div>
+        
 
         <div id="navbar" class="navbar-collapse collapse">
-          <ul class="nav navbar-nav">
-            <li id="destination"><a href="{{ action('DestinationController@listItem') }}">Destination</a></li>
-            <li id="rental"><a href="{{ action('RentalController@listItem') }}">Rental</a></li>
-            <li id="booking"><a href="{{ action('BookingController@listItem') }}">Booking</a></li>
-          </ul>
+
+          @if (Auth::check())
+            <ul class="nav navbar-nav">
+              <li id="destination"><a href="{{ action('DestinationController@listItem') }}">Destination</a></li>
+              <li id="rental"><a href="{{ action('RentalController@listItem') }}">Rental</a></li>
+              <li id="booking"><a href="{{ action('BookingController@listItem') }}">Booking</a></li>
+            </ul>
+          @else
+            
+          @endif
           
           <!-- Right Side Of Navbar -->
           <ul class="nav navbar-nav navbar-right">
               <!-- Authentication Links -->
               @if (Auth::guest())
                   <li><a href="{{ route('login') }}">Login</a></li>
-                  <li><a href="{{ route('register') }}">Register</a></li>
+                  <li><a href="{{ url('/search') }}" style="font-weight: 700;"><i class="material-icons" style="line-height: 20px;margin-top: -3px;">web</i> GO TO WEB <i class="material-icons" style="line-height: 20px;font-weight: 700;margin-top: -2px;">keyboard_arrow_right</i></a></li>
               @else
+                  <li><a href="{{ route('register') }}">Register New Admin</a></li>
                   <li class="dropdown">
                       <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                           {{ Auth::user()->name }} <span class="caret"></span>

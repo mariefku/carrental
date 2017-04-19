@@ -64,7 +64,7 @@
         <h3 class="panel-title">Cetak/Download Kode Booking</h3>
       </div>
       <div class="panel-body text-center">
-        <a href=" {{ url('/bookings/viewPDF/'.str_replace("#","",$newkode_booking)) }} " target="_blank">
+        <a href=" {{ url('/booking/viewPDF/'.str_replace("#","",$newkode_booking)) }} " target="_blank">
           <button type="submit" class="btn btn-raised btn-default"> <strong style="font-size: 24px;"> <i class="fa fa-print" aria-hidden="true"></i> CETAK/DOWNLOAD </strong> </button>
         </a>
         <br>
@@ -80,7 +80,7 @@
                 <div class="form-elements">
                     <label>{{ $items-> brand }} {{ $items-> model }}</label>
                     <div class="form-item">
-                        <img src="{{ $items-> img_url }}" alt="">
+                        <img src="{{ App\Rental::find($items->rental_id)->url.$items->img  }}/getPhoto" alt="">
                     </div>
                 </div>
             </div>

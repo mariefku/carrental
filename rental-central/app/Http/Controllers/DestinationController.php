@@ -9,6 +9,11 @@ use App\Destination;
 
 class DestinationController extends Controller
 {    
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     public function listItem(Request $request)
     { 
         $items = Destination::all();

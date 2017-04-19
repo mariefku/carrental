@@ -60,7 +60,7 @@ class ApiController extends Controller
 						    "destination" => $item->destination,
 						    "price" => $item->price,
 						    "year" => $item->year,
-						    "img_url" => $item->img,
+						    "img" => $item->img,
 						    "rental_id" => intval($rental_id),
 					    	"start_date" => $start_date,
 					    	"end_date" => $end_date,

@@ -100,7 +100,7 @@
           </div>   
       </div>
       <div class="panel-footer text-right">
-        <form action="{{ action('BookingController@updateItem') }}" method="post">
+        <form action="{{ action('GuestBookingController@updateItem') }}" method="post">
           <div>
           {{ csrf_field() }}
           <input type="hidden" name="id"            value="{{ $items-> id }}">
@@ -119,7 +119,7 @@
           <input type="hidden" name="rental_id"     value="{{ $items-> rental_id }}">
           <input type="hidden" name="start_date"    value="{{ $items-> start_date }}" id="start_date">
           <input type="hidden" name="end_date"      value="{{ $items-> end_date }}" id="end_date">
-          <input type="hidden" name="img_url"         value="{{ $items-> img_url }}">
+          <input type="hidden" name="img"         value="{{ $items-> img }}">
 
           <input type="hidden" name="nama"          value="{{ $items-> nama }}">
           <input type="hidden" name="nohp"          value="{{ $items-> nohp }}">
@@ -146,7 +146,7 @@
                 <div class="form-elements">
                     <label>{{ $items-> brand }} {{ $items-> model }}</label>
                     <div class="form-item">
-                        <img src="{{ $items-> img_url }}" alt="">
+                        <img src="{{ App\Rental::find($items->rental_id)->url.$items->img  }}/getPhoto" alt="">
                     </div>
                 </div>
             </div>
@@ -202,7 +202,7 @@
                 <span class="amount">{{ currency($items->price) }}</span>
             </div>
 
-            <form action="confirmed" method="post">
+            <form action="{{ action('GuestBookingController@storeItem') }}" method="post">
             <div class="price" id="captcha">
                 {!! app('captcha')->display(); !!} 
                  @if ($errors->has('g-recaptcha-response'))
@@ -231,7 +231,7 @@
                       <input type="hidden" name="rental_id"     value="{{ $items-> rental_id }}">
                       <input type="hidden" name="start_date"    value="{{ $items-> start_date }}" id="start_date">
                       <input type="hidden" name="end_date"      value="{{ $items-> end_date }}" id="end_date">
-                      <input type="hidden" name="img_url"         value="{{ $items-> img_url }}">
+                      <input type="hidden" name="img"         value="{{ $items-> img }}">
 
                       <input type="hidden" name="nama"          value="{{ $items-> nama }}">
                       <input type="hidden" name="nohp"          value="{{ $items-> nohp }}">

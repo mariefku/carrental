@@ -48,6 +48,4 @@ Route::post('/booking/{id}/confirm', 'BookingController@confirmItem');
 Route::post('/booking/{id}/reject', 'BookingController@rejectItem');
 Route::post('/booking/{id}/cancel', 'BookingController@cancelItem');
 
-
-Route::get('/bookinghistory', 'BookingHistoryController@listItem');
-Route::post('/bookinghistory/datatable', 'BookingHistoryController@datatable');
+Route::get('/{filename}/getPhoto', 'PhotosController@getPhoto')->name('car.getPhoto');

@@ -156,7 +156,7 @@
           <div class="form-group">
             <label for="" class="col-sm-2 control-label">Foto KTP</label>
             <div class="col-sm-10">
-              <img src="http://localhost/github/rental-central/public/bookings/{{ $items->fotoktp }}/getPhoto" alt="" style="width: 50%;">
+              <img src="http://localhost/github/rental-central/public/{{ $items->fotoktp }}/getPhoto" alt="" style="width: 50%;">
             </div>
           </div>   
 
@@ -176,7 +176,8 @@
             <h3 style="margin-bottom: 2px;">{{ $items-> brand }} {{ $items-> model }}</h3>
             <span style="font-style: italic;">{{ \App\Car::find($items->car_id)->plate_number }}</span>
             <div class="col-sm-12">
-              <img src="{{ \App\Car::find($items->car_id)->img }}" alt="" style="width:100%;">
+              <img src="{{ route('car.getPhoto', array('filename' => \App\Car::find($items->car_id)->img)) }}" alt="" style="width:100%;">
+
             </div>
           </div>
 

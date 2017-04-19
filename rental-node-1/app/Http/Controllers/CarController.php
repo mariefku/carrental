@@ -33,7 +33,7 @@ class CarController extends Controller
 
         $item = new Car();
         $item->fill($request->except("prices","img"));
-        $item->img = url('/storage/uploads/'.$request->img->hashName());
+        $item->img = $request->img->hashName();
         $item->save();
         $item->prices()->createMany(array_values(collect($request->prices)->map(function ($val, $key) {
             return [

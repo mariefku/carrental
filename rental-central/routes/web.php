@@ -41,24 +41,25 @@ Route::get('/admin/rentals/{id}/update', 'RentalController@updateForm');
 Route::post('/admin/rentals/{id}/update', 'RentalController@updateItem');
 Route::post('/admin/rentals/{id}/delete', 'RentalController@deleteItem');
 
-Route::get('/bookings', function () {
+Route::get('/booking', function () {
     return redirect('/search');
 });
-Route::get('/bookings/form', function () {
+Route::get('/booking/form', function () {
     return redirect('/search');
 });
-Route::get('/bookings/confirmed', function () {
+Route::get('/booking/confirmed', function () {
     return redirect('/search');
 });
-Route::post('/bookings', 'BookingController@viewItem');
-Route::post('/bookings/form', 'BookingController@createForm');
-Route::post('/bookings/confirm', 'BookingController@confirmItem');
-Route::post('/bookings/update', 'BookingController@updateItem');
-Route::post('/bookings/confirmed', 'BookingController@storeItem');
-Route::post('/bookings/printPDF', 'BookingController@printPDF');
-Route::get('/bookings/viewPDF/{kode_booking}', 'BookingController@viewPDF');
-Route::get('/bookings/{filename}/getPhoto', 'PhotosController@getPhoto')->name('ktp.getPhoto');
+Route::post('/booking/viewItem', 'GuestBookingController@viewItem');
+Route::post('/booking/form', 'GuestBookingController@createForm');
+Route::post('/booking/confirm', 'GuestBookingController@confirmItem');
+Route::post('/booking/update', 'GuestBookingController@updateItem');
+Route::post('/booking/confirmed', 'GuestBookingController@storeItem');
+Route::post('/booking/printPDF', 'GuestBookingController@printPDF');
+Route::get('/booking/viewPDF/{kode_booking}', 'GuestBookingController@viewPDF');
 
 Route::get('/admin/bookings', 'BookingController@listItem');
 Route::get('/admin/bookings/{kode_booking}/detail', 'BookingController@detailItem');
 Route::post('/admin/bookings/datatable', 'BookingController@datatable');
+
+Route::get('/{filename}/getPhoto', 'PhotosController@getPhoto')->name('ktp.getPhoto');

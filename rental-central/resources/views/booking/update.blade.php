@@ -40,7 +40,7 @@
     <h3 class="panel-title">Data Pemesanan</h3>
   </div>
 
-  <form class="" action="{{ action('BookingController@confirmItem') }}" method="post" enctype="multipart/form-data">
+  <form class="" action="{{ action('GuestBookingController@confirmItem') }}" method="post" enctype="multipart/form-data">
     {{ csrf_field() }}    
     <div class="panel-body">
     <div>
@@ -61,7 +61,7 @@
     <input type="hidden" name="start_date"    value="{{ $databooks-> start_date }}">
     <input type="hidden" name="end_date"      value="{{ $databooks-> end_date }}">
     <input type="hidden" name="end_date"      value="{{ $databooks-> end_date }}">
-    <input type="hidden" name="img_url"      value="{{ $databooks-> img_url }}">
+    <input type="hidden" name="img"      value="{{ $databooks-> img }}">
     </div>
         <div class="col-sm-6">
           <div class="form-group">

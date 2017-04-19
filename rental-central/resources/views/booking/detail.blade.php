@@ -5,15 +5,15 @@
 
   if ($status == "NEW BOOKING"){
     $alert = "info";
-    $color = "#5bc0de";
+    $color = "#03a9f4";
     $icon = "new_releases";
   }elseif ($status == "CONFIRMED") {
     $alert = "success";
-    $color = "#5cb85c";
+    $color = "#4caf50";
     $icon = "done";
   }elseif ($status == "REJECTED") {
     $alert = "danger";
-    $color = "#d9534f";
+    $color = "#f44336";
     $icon = "highlight_off";
   }elseif ($status == "CANCELED") {
     $alert = "warning";
@@ -105,7 +105,7 @@
                 <div class="form-elements">
                     <label>{{ $items-> brand }} {{ $items-> model }}</label>
                     <div class="form-item">
-                        <img src="@foreach ($img_url as $img) {{ $img }} @endforeach" alt="">
+                        <img src="@foreach ($img as $img) {{ App\Rental::find($items->rental_id)->url.$img  }}/getPhoto @endforeach" alt="">
                     </div>
                 </div>
             </div>
